@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.semashko.login.LoginActivity
 import com.semashko.maximaps.R
 import com.semashko.maximaps.fragments.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -43,6 +44,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        LoginActivity.startActivity(this)
 
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
