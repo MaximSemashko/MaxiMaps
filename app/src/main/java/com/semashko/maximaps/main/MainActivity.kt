@@ -2,11 +2,11 @@ package com.semashko.maximaps.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.WindowManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.semashko.login.LoginActivity
+import com.semashko.login.presentation.LoginActivity
 import com.semashko.maximaps.R
 import com.semashko.maximaps.fragments.HomeFragment
+import com.semashko.registration.presentation.RegistrationActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -45,7 +45,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        LoginActivity.startActivity(this)
+//        LoginActivity.startActivity(this)
+        RegistrationActivity.startActivity(this)
 
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
