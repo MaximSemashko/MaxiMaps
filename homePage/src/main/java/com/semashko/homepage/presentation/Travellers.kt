@@ -1,4 +1,4 @@
-package com.semashko.maximaps.popularTravellers
+package com.semashko.homepage.presentation
 
 import android.net.Uri
 

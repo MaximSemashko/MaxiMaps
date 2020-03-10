@@ -23,7 +23,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:clickable="true"
-        android:text="@string/see_all" />
+        android:text="See all" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/popular_travellers" />
+        android:text="Popular travellers" />
 
     <TextView
         android:id="@+id/seeAllPopularTravellersView"
@@ -53,7 +53,7 @@
         android:layout_marginEnd="16dp"
         android:layout_below="@id/popularPlacesRecyclerView"
         android:clickable="true"
-        android:text="@string/see_all"
+        android:text="See all"
         android:focusable="true" />
 
     <androidx.recyclerview.widget.RecyclerView

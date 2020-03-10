@@ -29,8 +29,7 @@ class LoginViewModel(
         loginUiMutableState.value = LoginUiState.Loading
 
         CoroutineScope(coroutineContext).launch {
-            when (val result = loginUseCase.
-                login(user)) {
+            when (val result = loginUseCase.login(user)) {
                 is Result.Success -> {
                     loginUiMutableState.value = LoginUiState.Success(result.value)
                     Log.i("TAG", result.value.toString())

@@ -46,4 +46,5 @@ dependencies {
 
     implementation project(':login')
     implementation project(':registration')
+    implementation project(':homePage')
 }
