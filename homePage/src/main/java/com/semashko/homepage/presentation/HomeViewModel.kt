@@ -22,17 +22,16 @@ class HomeViewModel(
     private val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + Job()
 
-    fun loadRoutes() {
+    fun loadModel() {
         coroutineContext.cancelChildren()
 
         homeUiMutableState.value = HomeUiState.Loading
 
         CoroutineScope(coroutineContext).launch {
-            when (val result = homeUseCase.getTouristsRoutes()) {
+            when (val result = homeUseCase.getHomeModel()) {
                 is Result.Success -> {
-                    result.value.forEach {
-                        Log.i("TAG1", it.toString() + '\n')
-                    }
+                    Log.i("ROUTES", result.value.routes.toString())
+                    Log.i("MANSIONS", result.value.mansions.toString())
                     homeUiMutableState.value = HomeUiState.Success(result.value)
                 }
                 is Result.Error -> HomeUiState.Error(result.exception)

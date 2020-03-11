@@ -1,6 +1,7 @@
 package com.semashko.homepage.data.api
 
 import com.google.gson.Gson
+import com.semashko.homepage.data.entities.Mansions
 import com.semashko.homepage.data.entities.TouristsRoutes
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
@@ -10,7 +11,7 @@ class HomeDataApi {
     private val client = OkHttpClient()
     private val gson = Gson()
 
-    fun getTouristsRoutes(): List<TouristsRoutes> {
+    fun getTouristsRoutes(): List<TouristsRoutes>? {
         val request = Request.Builder()
             .url("https://maximaps.firebaseio.com/TouristsRoutes.json")
             .get()
@@ -36,4 +37,32 @@ class HomeDataApi {
             touristsRoutes
         }
     }
+
+    fun getMansions(): List<Mansions>? {
+        val request = Request.Builder()
+            .url("https://maximaps.firebaseio.com/Mansions.json")
+            .get()
+            .build()
+
+        val response = client.newCall(request).execute()
+        val responseString = response.body().string()
+
+        return if (responseString == "null") {
+            emptyList()
+        } else {
+            val mansions = mutableListOf<Mansions>()
+
+            val objects = JSONObject(responseString)
+            val iterator = objects.keys()
+
+            while (iterator.hasNext()) {
+                val route = objects.getJSONObject(iterator.next())
+
+                mansions.add(gson.fromJson(route.toString(), Mansions::class.java))
+            }
+
+            mansions
+        }
+    }
+
 }

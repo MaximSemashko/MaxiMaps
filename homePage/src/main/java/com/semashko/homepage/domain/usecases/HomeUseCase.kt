@@ -1,7 +1,7 @@
 package com.semashko.homepage.domain.usecases
 
 import com.semashko.extensions.utils.Result
-import com.semashko.homepage.data.entities.TouristsRoutes
+import com.semashko.homepage.domain.entities.HomeModel
 import com.semashko.homepage.domain.repositories.IHomeRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -9,16 +9,27 @@ import kotlinx.coroutines.coroutineScope
 class HomeUseCase(
     private val homeRepository: IHomeRepository
 ) : IHomeUseCase {
-    override suspend fun getTouristsRoutes(): Result<List<TouristsRoutes>> {
+    override suspend fun getHomeModel(): Result<HomeModel> {
         return coroutineScope {
             val routesAsync = async { homeRepository.getTouristsRoutes() }
+            val mansionsAsync = async { homeRepository.getMansions() }
 
             val touristsRoutes = when (val result = routesAsync.await()) {
                 is Result.Success -> result.value
                 is Result.Error -> emptyList()
             }
 
-            Result.Success(touristsRoutes)
+            val mansions = when (val result = mansionsAsync.await()) {
+                is Result.Success -> result.value
+                is Result.Error -> emptyList()
+            }
+
+            Result.Success(
+                HomeModel(
+                    routes = touristsRoutes,
+                    mansions = mansions
+                )
+            )
         }
     }
 }

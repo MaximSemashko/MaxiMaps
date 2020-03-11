@@ -45,7 +45,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             }
         })
 
-        viewModel.loadRoutes()
+        viewModel.loadModel()
     }
 
     private fun initList() {
