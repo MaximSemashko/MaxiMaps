@@ -1,6 +1,7 @@
 package com.semashko.homepage.domain.repositories
 
 import com.semashko.extensions.utils.Result
+import com.semashko.homepage.data.entities.Attractions
 import com.semashko.homepage.data.entities.Mansions
 import com.semashko.homepage.data.entities.TouristsRoutes
 import com.semashko.homepage.data.services.IHomeService
@@ -24,6 +25,16 @@ class HomeRepository(
         return withContext(Dispatchers.IO) {
             runCatching {
                 Result.Success(homeService.getMansion() ?: emptyList())
+            }.getOrElse {
+                Result.Error(it)
+            }
+        }
+    }
+
+    override suspend fun getAttractions(): Result<List<Attractions>> {
+        return withContext(Dispatchers.IO) {
+            runCatching {
+                Result.Success(homeService.getAttractions() ?: emptyList())
             }.getOrElse {
                 Result.Error(it)
             }

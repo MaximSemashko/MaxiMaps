@@ -30,6 +30,7 @@ class HomeViewModel(
         CoroutineScope(coroutineContext).launch {
             when (val result = homeUseCase.getHomeModel()) {
                 is Result.Success -> {
+                    Log.i("ATTRACTIONS", result.value.attractions.toString())
                     Log.i("ROUTES", result.value.routes.toString())
                     Log.i("MANSIONS", result.value.mansions.toString())
                     homeUiMutableState.value = HomeUiState.Success(result.value)
