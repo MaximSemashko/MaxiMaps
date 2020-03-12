@@ -44,6 +44,9 @@ dependencies {
     implementation 'org.koin:koin-android:2.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
+
     implementation project(':login')
     implementation project(':registration')
+    implementation project(':commonResources')
 }
