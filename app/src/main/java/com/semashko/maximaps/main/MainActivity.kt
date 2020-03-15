@@ -54,8 +54,8 @@ class MainActivity : AppCompatActivity() {
                 viewPager.setCurrentItem(position, true)
             }
         }
-//        LoginActivity.startActivity(this)
-//        RegistrationActivity.startActivity(this)
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 }
 
