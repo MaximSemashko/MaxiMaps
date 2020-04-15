@@ -59,6 +59,8 @@ class MainActivity : AppCompatActivity() {
         }
 
 //        RegistrationActivity.startActivity(this)
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 }
 
