@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.semashko.login.presentation.LoginActivity
 import com.semashko.maximaps.R
 import com.semashko.maximaps.fragments.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,6 +16,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        LoginActivity.startActivity(this)
 
         val listOfFragments =
             listOf(
@@ -54,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                 viewPager.setCurrentItem(position, true)
             }
         }
-//        LoginActivity.startActivity(this)
+
 //        RegistrationActivity.startActivity(this)
     }
 }
