@@ -14,29 +14,26 @@ import org.koin.core.qualifier.named
 import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
-object RegistrationDependency {
-    val module = module {
-        factory {
-            FirebaseRegistration()
-        }
+val registrationModule = module {
+    factory {
+        FirebaseRegistration()
+    }
 
-        scope(named<RegistrationActivity>()) {
-            scoped<IRegistrationService> { RegistrationService() }
-            scoped<ISignUpRepository> {
-                SignUpRepository(
-                    registrationService = get()
-                )
-            }
-            scoped<ISignUpUseCase> {
-                SignUpUseCase(
-                    signUpRepository = get()
-                )
-            }
+    scope(named<RegistrationActivity>()) {
+        scoped<IRegistrationService> { RegistrationService() }
+        scoped<ISignUpRepository> {
+            SignUpRepository(
+                registrationService = get()
+            )
         }
-
-        viewModel { (scopeId: ScopeID) ->
+        scoped<ISignUpUseCase> {
+            SignUpUseCase(
+                signUpRepository = get()
+            )
+        }
+        viewModel {
             RegistrationViewModel(
-                signUpUseCase = getScope(scopeId).get()
+                signUpUseCase = get()
             )
         }
     }

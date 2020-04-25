@@ -13,19 +13,15 @@ import com.semashko.registration.data.entities.User
 import kotlinx.android.synthetic.main.activity_registration.*
 import org.koin.android.ext.android.getKoin
 import org.koin.androidx.scope.currentScope
+import org.koin.androidx.scope.lifecycleScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 
 class RegistrationActivity : AppCompatActivity() {
 
-    private val activityScope =
-        getKoin().getOrCreateScope(
-            named<RegistrationActivity>().toString(),
-            named<RegistrationActivity>()
-        )
     private val viewModel: RegistrationViewModel by viewModel {
-        parametersOf(currentScope.id)
+        parametersOf(lifecycleScope.id)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,12 +49,6 @@ class RegistrationActivity : AppCompatActivity() {
                 )
             )
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        activityScope.close()
     }
 
     companion object {
