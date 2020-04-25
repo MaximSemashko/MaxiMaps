@@ -54,8 +54,6 @@ class MainActivity : AppCompatActivity() {
                 viewPager.setCurrentItem(position, true)
             }
         }
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 }
 
