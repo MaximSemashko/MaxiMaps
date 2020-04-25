@@ -13,17 +13,15 @@ import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.popular_places.*
 import org.koin.android.ext.android.getKoin
 import org.koin.androidx.scope.currentScope
+import org.koin.androidx.scope.lifecycleScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 
 class HomeFragment : Fragment(R.layout.home_fragment) {
 
-    private val fragmentScope =
-        getKoin().getOrCreateScope(named<HomeFragment>().toString(), named<HomeFragment>())
-
     private val viewModel: HomeViewModel by viewModel {
-        parametersOf(currentScope.id)
+        parametersOf(lifecycleScope.id)
     }
 
     private lateinit var popularTravellersAdapter: PopularTravellersAdapter
@@ -71,11 +69,5 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = popularTravellersAdapter
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        fragmentScope.close()
     }
 }

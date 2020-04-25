@@ -14,30 +14,26 @@ import org.koin.core.qualifier.named
 import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
-object HomeDependency {
-    val module = module {
-        factory {
-            HomeDataApi()
-        }
+val homeModule = module {
+    factory {
+        HomeDataApi()
+    }
 
-        scope(named<HomeFragment>()) {
-            scoped<IHomeService> { HomeService() }
-            scoped<IHomeRepository> {
-                HomeRepository(
-                    homeService = get()
-                )
-            }
-            scoped<IHomeUseCase> {
-                HomeUseCase(
-                    homeRepository = get()
-                )
-            }
+    scope(named<HomeFragment>()) {
+        scoped<IHomeService> { HomeService() }
+        scoped<IHomeRepository> {
+            HomeRepository(
+                homeService = get()
+            )
         }
-
-        viewModel { (scopeId: ScopeID) ->
+        scoped<IHomeUseCase> {
+            HomeUseCase(
+                homeRepository = get()
+            )
+        }
+        viewModel {
             HomeViewModel(
-                homeUseCase =
-                getScope(scopeId).get()
+                homeUseCase = get()
             )
         }
     }

@@ -14,29 +14,26 @@ import org.koin.core.qualifier.named
 import org.koin.core.scope.ScopeID
 import org.koin.dsl.module
 
-object LoginDependency {
-    val module = module {
-        factory {
-            FirebaseAuth()
-        }
+val loginModule = module {
+    factory {
+        FirebaseAuth()
+    }
 
-        scope(named<LoginActivity>()) {
-            scoped<ILoginService> { LoginService() }
-            scoped<ILoginRepository> {
-                LoginRepository(
-                    loginService = get()
-                )
-            }
-            scoped<ILoginUseCase> {
-                LoginUseCase(
-                    loginRepository = get()
-                )
-            }
+    scope(named<LoginActivity>()) {
+        scoped<ILoginService> { LoginService() }
+        scoped<ILoginRepository> {
+            LoginRepository(
+                loginService = get()
+            )
         }
-
-        viewModel { (scopeId: ScopeID) ->
+        scoped<ILoginUseCase> {
+            LoginUseCase(
+                loginRepository = get()
+            )
+        }
+        viewModel {
             LoginViewModel(
-                loginUseCase = getScope(scopeId).get()
+                loginUseCase = get()
             )
         }
     }

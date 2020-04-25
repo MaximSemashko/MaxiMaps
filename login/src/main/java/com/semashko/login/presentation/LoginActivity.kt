@@ -13,16 +13,15 @@ import com.semashko.login.data.entities.User
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.getKoin
 import org.koin.androidx.scope.currentScope
+import org.koin.androidx.scope.lifecycleScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 
 class LoginActivity : AppCompatActivity() {
 
-    private val activityScope =
-        getKoin().getOrCreateScope(named<LoginActivity>().toString(), named<LoginActivity>())
     private val viewModel: LoginViewModel by viewModel {
-        parametersOf(currentScope.id)
+        parametersOf(lifecycleScope.id)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,12 +45,6 @@ class LoginActivity : AppCompatActivity() {
 
             viewModel.load(User("max1@mail.ru", "123123"))
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        activityScope.close()
     }
 
     companion object {
