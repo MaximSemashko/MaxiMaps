@@ -5,17 +5,17 @@ import com.google.gson.annotations.SerializedName
 
 data class Mansions(
     @SerializedName("name")
-    val name: String?,
+    val name: String? = null,
 
     @SerializedName("address")
-    val address: String?,
+    val address: String? = null,
 
     @SerializedName("contacts")
-    val contacts: List<String>?,
+    val contacts: List<String>? = null,
 
     @SerializedName("webSite")
-    val webSite: String?,
+    val webSite: String? = null,
 
     @SerializedName("images")
-    val imagesUrls: List<String>?
+    val imagesUrls: List<String>? = null
 )

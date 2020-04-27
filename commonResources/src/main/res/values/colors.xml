@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorBlack">#010101</color>
-    <color name="colorBlackOpacity80">#CC010101</color>
-    <color name="colorOrange">#FC6633</color>
-    <color name="colorOrangeOpacity80">#CCFC6633</color>
-    <color name="colorWhite">#FFFFFF</color>
-    <color name="colorGrey">#CBCBCB</color>
-    <color name="colorLight">#ffebee</color>
+    <color name="black">#010101</color>
+    <color name="blackOpacity80">#CC010101</color>
+    <color name="orange">#FC6633</color>
+    <color name="orangeOpacity80">#CCFC6633</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#CBCBCB</color>
+    <color name="light">#ffebee</color>
 </resources>

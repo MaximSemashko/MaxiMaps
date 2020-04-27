@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.semashko.homepage.presentation.HomeFragment
+import com.semashko.homepage.presentation.fragments.HomeFragment
 import com.semashko.maximaps.R
 import kotlinx.android.synthetic.main.activity_main.*
 

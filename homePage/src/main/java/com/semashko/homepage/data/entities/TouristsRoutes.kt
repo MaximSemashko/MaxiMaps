@@ -1,24 +1,23 @@
 package com.semashko.homepage.data.entities
 
-import android.icu.util.TimeUnit
 import com.google.gson.annotations.SerializedName
 
 data class TouristsRoutes(
     @SerializedName("name")
-    val name: String,
+    val name: String? = null,
 
     @SerializedName("type")
-    val type: String,
+    val type: String? = null,
 
     @SerializedName("distance")
-    val distance: Double,
+    val distance: Double? = null,
 
     @SerializedName("duration")
-    val duration: Long,
+    val duration: Long? = null,
 
     @SerializedName("routes")
-    val routes: List<String>,
+    val routes: List<String>? = null,
 
     @SerializedName("imageUrl")
-    val imageUrl: String
+    val imageUrl: String? = null
 )

@@ -8,62 +8,99 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/popularPlacesView"
+        android:id="@+id/attractionsView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Popular places in Grodno" />
+        android:text="Attractions"
+        android:textColor="@color/black" />
 
     <TextView
-        android:id="@+id/seeAllPopularPlacesView"
+        android:id="@+id/seeAllAttractionsView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:clickable="true"
-        android:text="See all" />
+        android:focusable="true"
+        android:text="See all"
+        android:textColor="@color/black" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/attractionsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/popularPlacesView"
+        android:layout_below="@id/attractionsView"
         android:layout_margin="16dp"
-        android:id="@+id/popularPlacesRecyclerView"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/place_item" />
+        tools:listitem="@layout/attractions_item" />
 
     <TextView
-        android:id="@+id/popularTravellersView"
+        android:id="@+id/touristsRoutesView"
         android:layout_width="wrap_content"
-        android:layout_below="@id/popularPlacesRecyclerView"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/attractionsRecyclerView"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Popular travellers" />
+        android:text="Tourists routes"
+        android:textColor="@color/black" />
 
     <TextView
-        android:id="@+id/seeAllPopularTravellersView"
+        android:id="@+id/seeAllTouristsRoutesView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_below="@+id/attractionsRecyclerView"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_below="@id/popularPlacesRecyclerView"
         android:clickable="true"
         android:text="See all"
-        android:focusable="true" />
+        android:textColor="@color/black" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/touristsRoutesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/popularTravellersView"
-        android:layout_margin="16dp"
-        android:id="@+id/popularTravellersRecyclerView"
+        android:layout_below="@id/touristsRoutesView"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/traveller_item" />
+        tools:listitem="@layout/tourists_route_item" />
+
+    <TextView
+        android:id="@+id/mansionsView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/touristsRoutesRecyclerView"
+        android:layout_marginStart="16dp"
+        android:text="Mansions"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/seeAllMansionsView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/touristsRoutesRecyclerView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="See all"
+        android:textColor="@color/black" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mansionsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mansionsView"
+        android:layout_margin="16dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/mansion_item" />
 
 </RelativeLayout>
