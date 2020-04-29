@@ -13,7 +13,7 @@
             android:id="@+id/touristRouteImageView"
             android:layout_width="match_parent"
             android:layout_height="130dp"
-            android:src="@drawable/forest"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +22,7 @@
             android:id="@+id/touristRouteNameView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:text="Name"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,11 +33,11 @@
             android:id="@+id/touristRouteDurationView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             android:text="3h 30m"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/touristRouteNameView" />
 

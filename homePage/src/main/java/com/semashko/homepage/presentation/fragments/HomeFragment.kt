@@ -16,17 +16,15 @@ import com.semashko.homepage.presentation.adapters.AttractionsAdapter
 import com.semashko.homepage.presentation.adapters.MansionsAdapter
 import com.semashko.homepage.presentation.adapters.TouristsRoutesAdapter
 import com.semashko.homepage.presentation.viewmodels.HomeViewModel
+import com.semashko.provider.BaseItemDecoration
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.popular_places.*
 import org.koin.androidx.scope.lifecycleScope
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
+import org.koin.androidx.viewmodel.scope.viewModel
 
 class HomeFragment : Fragment(R.layout.home_fragment) {
 
-    private val viewModel: HomeViewModel by viewModel {
-        parametersOf(lifecycleScope.id)
-    }
+    private val viewModel: HomeViewModel by lifecycleScope.viewModel(this)
 
     private val touristsRoutesList = ArrayList<TouristsRoutes>()
     private val attractionsList = ArrayList<Attractions>()
@@ -57,7 +55,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
                 TouristsRoutes(
                     name = "name",
                     type = "name",
-                    imageUrl = "https://picsum.photos/200"
+                    imageUrl = "https://picsum.photos/seed/picsum/800/800"
                 )
             )
 
@@ -66,9 +64,9 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
                     name = "name",
                     address = "wtf street",
                     imagesUrls = listOf(
-                        "https://picsum.photos/200",
-                        "https://picsum.photos/200",
-                        "https://picsum.photos/200"
+                        "https://picsum.photos/seed/picsum/800/800",
+                        "https://picsum.photos/seed/picsum/800/800",
+                        "https://picsum.photos/seed/picsum/800/800"
                     )
                 )
             )
@@ -78,7 +76,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
                     name = "name",
                     type = "type",
                     description = "salam popolam",
-                    imageUrl = "https://picsum.photos/200"
+                    imageUrl = "https://picsum.photos/seed/picsum/800/800"
                 )
             )
         }
@@ -104,16 +102,31 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         touristsRoutesRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = touristsRoutesAdapter
+            addItemDecoration(
+                BaseItemDecoration(
+                    resources.getDimension(R.dimen.default_padding).toInt()
+                )
+            )
         }
 
         mansionsRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = mansionsAdapter
+            addItemDecoration(
+                BaseItemDecoration(
+                    resources.getDimension(R.dimen.default_padding).toInt()
+                )
+            )
         }
 
         attractionsRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = attractionsAdapter
+            addItemDecoration(
+                BaseItemDecoration(
+                    resources.getDimension(R.dimen.default_padding).toInt()
+                )
+            )
         }
     }
 }

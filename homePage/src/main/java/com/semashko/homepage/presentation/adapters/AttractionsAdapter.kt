@@ -39,7 +39,7 @@ class AttractionsAdapter(
         Glide.with(context)
             .load(attractions[position].imageUrl)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(holder.itemView.mansionsImageView)
+            .into(holder.itemView.attractionsImageView)
     }
 
     class AttractionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

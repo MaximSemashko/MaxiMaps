@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/softPeach"
     android:layout_marginTop="?android:attr/actionBarSize"
     android:orientation="vertical">
 
@@ -33,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/attractionsView"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/attractions_item" />
@@ -65,8 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/touristsRoutesView"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_margin="8dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/tourists_route_item" />
@@ -86,8 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/touristsRoutesRecyclerView"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="14dp"
         android:clickable="true"
         android:focusable="true"
         android:text="See all"
@@ -98,7 +97,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/mansionsView"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/mansion_item" />
