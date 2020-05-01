@@ -11,18 +11,12 @@ import com.semashko.extensions.visible
 import com.semashko.login.R
 import com.semashko.login.data.entities.User
 import kotlinx.android.synthetic.main.activity_login.*
-import org.koin.android.ext.android.getKoin
-import org.koin.androidx.scope.currentScope
 import org.koin.androidx.scope.lifecycleScope
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
-import org.koin.core.qualifier.named
+import org.koin.androidx.viewmodel.scope.viewModel
 
 class LoginActivity : AppCompatActivity() {
 
-    private val viewModel: LoginViewModel by viewModel {
-        parametersOf(lifecycleScope.id)
-    }
+    private val viewModel: LoginViewModel by lifecycleScope.viewModel(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
