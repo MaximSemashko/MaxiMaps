@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#010101</color>
+    <color name="blackOpacity50">#80000000</color>
     <color name="blackOpacity80">#CC010101</color>
     <color name="softPeach">#F9F5F4</color>
+    <color name="softPeachOpacity80">#CCF9F5F4</color>
     <color name="orange">#FC6633</color>
     <color name="orangeOpacity80">#CCFC6633</color>
     <color name="white">#FFFFFF</color>
