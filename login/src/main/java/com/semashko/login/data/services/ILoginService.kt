@@ -5,5 +5,5 @@ import com.semashko.login.data.entities.User
 
 interface ILoginService {
 
-    fun getLoginResponse(user: User) : LoginResponse?
+    fun getLoginResponse(user: User): LoginResponse?
 }

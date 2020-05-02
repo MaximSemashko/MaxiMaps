@@ -1,7 +1,7 @@
 package com.semashko.login.domain.usecases
 
-import com.semashko.login.data.entities.LoginResponse
 import com.semashko.extensions.utils.Result
+import com.semashko.login.data.entities.LoginResponse
 import com.semashko.login.data.entities.User
 
 interface ILoginUseCase {

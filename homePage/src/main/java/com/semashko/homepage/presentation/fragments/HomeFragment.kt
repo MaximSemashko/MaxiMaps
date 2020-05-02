@@ -11,15 +11,17 @@ import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.semashko.extensions.gone
 import com.semashko.extensions.visible
 import com.semashko.homepage.R
-import com.semashko.homepage.data.entities.Attractions
-import com.semashko.homepage.data.entities.Mansions
-import com.semashko.homepage.data.entities.TouristsRoutes
 import com.semashko.homepage.presentation.HomeUiState
 import com.semashko.homepage.presentation.adapters.AttractionsAdapter
 import com.semashko.homepage.presentation.adapters.MansionsAdapter
 import com.semashko.homepage.presentation.adapters.TouristsRoutesAdapter
 import com.semashko.homepage.presentation.viewmodels.HomeViewModel
 import com.semashko.provider.BaseItemDecoration
+import com.semashko.provider.models.home.Attractions
+import com.semashko.provider.models.home.HomeModel
+import com.semashko.provider.models.home.Mansions
+import com.semashko.provider.models.home.TouristsRoutes
+import com.semashko.seealldetailspage.presentation.fragments.SeeAllFragment
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.popular_places.*
 import org.koin.androidx.scope.lifecycleScope
@@ -87,16 +89,24 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         seeAllTouristsRoutesView.text = Html.fromHtml("<u>See all</>")
 
         seeAllTouristsRoutesView.setOnClickListener {
-            //TODO
+            openSeeAllDetailsPage(HomeModel(routes = touristsRoutesList))
         }
 
         seeAllAttractionsView.setOnClickListener {
-            //TODO
+            openSeeAllDetailsPage(HomeModel(attractions = attractionsList))
         }
 
         seeAllMansionsView.setOnClickListener {
-            //TODO
+            openSeeAllDetailsPage(HomeModel(mansions = mansionsList))
         }
+    }
+
+    private fun openSeeAllDetailsPage(homeModel: HomeModel) {
+        activity?.supportFragmentManager
+            ?.beginTransaction()
+            ?.add(SeeAllFragment.newInstance(homeModel), HomeFragment::class.simpleName)
+            ?.addToBackStack(null)
+            ?.commit()
     }
 
     private fun initList() {
@@ -154,7 +164,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             adapter = touristsRoutesAdapter
             addItemDecoration(
                 BaseItemDecoration(
-                    resources.getDimension(R.dimen.default_padding).toInt()
+                    horizontalMargin = resources.getDimension(R.dimen.default_padding).toInt()
                 )
             )
         }
@@ -164,7 +174,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             adapter = mansionsAdapter
             addItemDecoration(
                 BaseItemDecoration(
-                    resources.getDimension(R.dimen.default_padding).toInt()
+                    horizontalMargin = resources.getDimension(R.dimen.default_padding).toInt()
                 )
             )
         }
@@ -174,7 +184,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             adapter = attractionsAdapter
             addItemDecoration(
                 BaseItemDecoration(
-                    resources.getDimension(R.dimen.default_padding).toInt()
+                    horizontalMargin = resources.getDimension(R.dimen.default_padding).toInt()
                 )
             )
         }

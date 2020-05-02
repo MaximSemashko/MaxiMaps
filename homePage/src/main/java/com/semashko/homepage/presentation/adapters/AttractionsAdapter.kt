@@ -8,9 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.semashko.homepage.R
-import com.semashko.homepage.data.entities.Attractions
+import com.semashko.provider.models.home.Attractions
 import kotlinx.android.synthetic.main.attractions_item.view.*
-import kotlinx.android.synthetic.main.mansion_item.view.*
 
 class AttractionsAdapter(
     private val context: Context,

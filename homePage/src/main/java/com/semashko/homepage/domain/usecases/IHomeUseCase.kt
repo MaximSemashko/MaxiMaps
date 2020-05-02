@@ -1,7 +1,7 @@
 package com.semashko.homepage.domain.usecases
 
 import com.semashko.extensions.utils.Result
-import com.semashko.homepage.domain.entities.HomeModel
+import com.semashko.provider.models.home.HomeModel
 
 interface IHomeUseCase {
 

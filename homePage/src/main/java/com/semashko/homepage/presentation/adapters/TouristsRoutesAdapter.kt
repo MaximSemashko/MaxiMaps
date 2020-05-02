@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.semashko.homepage.R
-import com.semashko.homepage.data.entities.TouristsRoutes
+import com.semashko.provider.models.home.TouristsRoutes
 import kotlinx.android.synthetic.main.tourists_route_item.view.*
 
 class TouristsRoutesAdapter(

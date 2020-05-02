@@ -1,7 +1,10 @@
-package com.semashko.homepage.data.entities
+package com.semashko.provider.models.home
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Attractions(
     @SerializedName("name")
     val name: String? = null,
@@ -20,4 +23,4 @@ data class Attractions(
 
     @SerializedName("imageUrl")
     val imageUrl: String? = null
-)
+) : Parcelable
