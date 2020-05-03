@@ -138,11 +138,10 @@ class SeeAllFragment : Fragment(R.layout.fragment_see_all) {
 
     companion object {
         fun newInstance(homeModel: HomeModel) =
-            SeeAllFragment()
-                .apply {
-                    arguments = Bundle().apply {
-                        putParcelable(HOME_MODEL, homeModel)
-                    }
+            SeeAllFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(HOME_MODEL, homeModel)
                 }
+            }
     }
 }

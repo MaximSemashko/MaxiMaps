@@ -52,4 +52,5 @@ dependencies {
     implementation project(':homePage')
     implementation project(':seealldetailspage')
     implementation project(':provider')
+    implementation project(':itemDetailsPage')
 }
