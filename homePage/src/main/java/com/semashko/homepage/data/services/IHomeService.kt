@@ -1,8 +1,8 @@
 package com.semashko.homepage.data.services
 
-import com.semashko.homepage.data.entities.Attractions
-import com.semashko.homepage.data.entities.Mansions
-import com.semashko.homepage.data.entities.TouristsRoutes
+import com.semashko.provider.models.home.Attractions
+import com.semashko.provider.models.home.Mansions
+import com.semashko.provider.models.home.TouristsRoutes
 
 interface IHomeService {
 

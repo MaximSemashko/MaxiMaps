@@ -1,6 +1,6 @@
 package com.semashko.homepage.presentation
 
-import com.semashko.homepage.domain.entities.HomeModel
+import com.semashko.provider.models.home.HomeModel
 
 sealed class HomeUiState {
     object Loading : HomeUiState()

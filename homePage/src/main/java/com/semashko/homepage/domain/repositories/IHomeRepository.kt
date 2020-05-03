@@ -1,9 +1,9 @@
 package com.semashko.homepage.domain.repositories
 
 import com.semashko.extensions.utils.Result
-import com.semashko.homepage.data.entities.Attractions
-import com.semashko.homepage.data.entities.Mansions
-import com.semashko.homepage.data.entities.TouristsRoutes
+import com.semashko.provider.models.home.Attractions
+import com.semashko.provider.models.home.Mansions
+import com.semashko.provider.models.home.TouristsRoutes
 
 interface IHomeRepository {
 

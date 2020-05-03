@@ -1,8 +1,8 @@
 package com.semashko.homepage.domain.usecases
 
 import com.semashko.extensions.utils.Result
-import com.semashko.homepage.domain.entities.HomeModel
 import com.semashko.homepage.domain.repositories.IHomeRepository
+import com.semashko.provider.models.home.HomeModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 

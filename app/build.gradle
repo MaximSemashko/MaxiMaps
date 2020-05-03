@@ -50,4 +50,6 @@ dependencies {
     implementation project(':registration')
     implementation project(':commonResources')
     implementation project(':homePage')
+    implementation project(':seealldetailspage')
+    implementation project(':provider')
 }
