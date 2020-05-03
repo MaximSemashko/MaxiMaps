@@ -23,6 +23,8 @@ private const val HOME_MODEL = "HOME_MODEL"
 class SeeAllFragment : Fragment(R.layout.fragment_see_all) {
     private val viewModel: SeeAllViewModel by lifecycleScope.viewModel(this)
 
+    private lateinit var seeAllAdapter: SeeAllAdapter
+
     private var homeModel: HomeModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +64,10 @@ class SeeAllFragment : Fragment(R.layout.fragment_see_all) {
         viewModel.mansionsData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is MansionsUiState.Loading -> swipeRefreshLayout.isRefreshing = true
-                is MansionsUiState.Success -> swipeRefreshLayout.isRefreshing = false
+                is MansionsUiState.Success -> {
+                    seeAllAdapter.updatePage(mansions = it.mansions)
+                    swipeRefreshLayout.isRefreshing = false
+                }
                 is MansionsUiState.Error -> swipeRefreshLayout.isRefreshing = false
             }
         })
@@ -70,7 +75,10 @@ class SeeAllFragment : Fragment(R.layout.fragment_see_all) {
         viewModel.routesData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is RoutesUiState.Loading -> swipeRefreshLayout.isRefreshing = true
-                is RoutesUiState.Success -> swipeRefreshLayout.isRefreshing = false
+                is RoutesUiState.Success -> {
+                    seeAllAdapter.updatePage(routes = it.routes)
+                    swipeRefreshLayout.isRefreshing = false
+                }
                 is RoutesUiState.Error -> swipeRefreshLayout.isRefreshing = false
             }
         })
@@ -78,7 +86,10 @@ class SeeAllFragment : Fragment(R.layout.fragment_see_all) {
         viewModel.attractionsData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is AttractionsUiState.Loading -> swipeRefreshLayout.isRefreshing = true
-                is AttractionsUiState.Success -> swipeRefreshLayout.isRefreshing = false
+                is AttractionsUiState.Success -> {
+                    seeAllAdapter.updatePage(attractions = it.attractions)
+                    swipeRefreshLayout.isRefreshing = false
+                }
                 is AttractionsUiState.Error -> swipeRefreshLayout.isRefreshing = false
             }
         })
@@ -105,7 +116,7 @@ class SeeAllFragment : Fragment(R.layout.fragment_see_all) {
     }
 
     private fun initRecyclerView() {
-        val touristsRoutesAdapter =
+        seeAllAdapter =
             SeeAllAdapter(
                 requireContext(),
                 attractions = homeModel?.attractions,
@@ -115,7 +126,7 @@ class SeeAllFragment : Fragment(R.layout.fragment_see_all) {
 
         seeAllRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = touristsRoutesAdapter
+            adapter = seeAllAdapter
             addItemDecoration(
                 BaseItemDecoration(
                     verticalMargin = resources.getDimension(R.dimen.default_padding).toInt(),

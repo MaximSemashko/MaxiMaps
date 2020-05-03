@@ -23,7 +23,7 @@ sealed class RoutesUiState {
 sealed class AttractionsUiState {
     object Loading : AttractionsUiState()
 
-    data class Success(val mansions: List<Attractions>) : AttractionsUiState()
+    data class Success(val attractions: List<Attractions>) : AttractionsUiState()
 
     data class Error(val throwable: Throwable) : AttractionsUiState()
 }

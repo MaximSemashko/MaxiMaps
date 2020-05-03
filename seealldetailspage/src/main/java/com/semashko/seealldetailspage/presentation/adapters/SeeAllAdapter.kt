@@ -24,9 +24,9 @@ class SeeAllAdapter(
     mansions: List<Mansions>? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val attractionsList: List<Attractions> = attractions ?: emptyList()
-    private val routesList: List<TouristsRoutes> = routes ?: emptyList()
-    private val mansionsList: List<Mansions> = mansions ?: emptyList()
+    private var attractionsList: List<Attractions> = attractions ?: emptyList()
+    private var routesList: List<TouristsRoutes> = routes ?: emptyList()
+    private var mansionsList: List<Mansions> = mansions ?: emptyList()
 
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -99,6 +99,18 @@ class SeeAllAdapter(
             mansionsList.isNotEmpty() -> TYPE_MANSIONS
             else -> throw IllegalArgumentException("Invalid view type")
         }
+    }
+
+    fun updatePage(
+        attractions: List<Attractions>? = null,
+        routes: List<TouristsRoutes>? = null,
+        mansions: List<Mansions>? = null
+    ) {
+        attractionsList = attractions ?: emptyList()
+        routesList = routes ?: emptyList()
+        mansionsList = mansions ?: emptyList()
+
+        notifyDataSetChanged()
     }
 }
 
