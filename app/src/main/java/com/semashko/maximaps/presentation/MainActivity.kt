@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.semashko.homepage.presentation.fragments.HomeFragment
+import com.semashko.itemdetailspage.presentation.fragments.ItemDetailsPageFragment
 import com.semashko.maximaps.R
 import com.semashko.provider.models.home.Attractions
 import com.semashko.provider.models.home.HomeModel
@@ -68,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                 SeeAllFragment.newInstance(HomeModel(routes = touristsRoutesList)),
                 HomeFragment(),
                 SeeAllFragment.newInstance(HomeModel(attractions = attractionsList)),
-                SeeAllFragment.newInstance(HomeModel(mansions = mansionsList))
+                ItemDetailsPageFragment.newInstance(HomeModel(mansions = mansionsList))
             )
 
         val screenSlidePagerAdapter = ScreenSlidePagerAdapter(
