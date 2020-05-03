@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:text="Registration"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/black"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,10 +28,10 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginRight="16dp"
-        android:textColorHint="@color/colorOrange"
-        app:boxBackgroundColor="#80000000"
-        app:boxStrokeColor="#80000000"
-        app:hintTextColor="#80000000"
+        android:textColorHint="@color/orange"
+        app:boxBackgroundColor="@color/blackOpacity50"
+        app:boxStrokeColor="@color/blackOpacity50"
+        app:hintTextColor="@color/blackOpacity50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
@@ -43,8 +43,8 @@
             android:drawablePadding="16dp"
             android:hint="Name"
             android:inputType="text"
-            android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorOrange" />
+            android:textColor="@color/white"
+            android:textColorHint="@color/orange" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,10 +54,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:textColorHint="@color/colorOrange"
-        app:boxBackgroundColor="#80000000"
-        app:boxStrokeColor="#80000000"
-        app:hintTextColor="#80000000"
+        android:textColorHint="@color/orange"
+        app:boxBackgroundColor="@color/blackOpacity50"
+        app:boxStrokeColor="@color/blackOpacity50"
+        app:hintTextColor="@color/blackOpacity50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameTextInputLayout">
@@ -69,8 +69,8 @@
             android:drawablePadding="16dp"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorOrange" />
+            android:textColor="@color/white"
+            android:textColorHint="@color/orange" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,11 +82,11 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
-        android:textColorHint="@color/colorOrange"
-        app:boxBackgroundColor="#80000000"
-        app:boxStrokeColor="#80000000"
+        android:textColorHint="@color/orange"
+        app:boxBackgroundColor="@color/blackOpacity50"
+        app:boxStrokeColor="@color/blackOpacity50"
         app:endIconMode="password_toggle"
-        app:hintTextColor="#80000000"
+        app:hintTextColor="@color/blackOpacity50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sexRadioGroup">
@@ -98,8 +98,8 @@
             android:drawablePadding="16dp"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorOrange" />
+            android:textColor="@color/white"
+            android:textColorHint="@color/orange" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,11 +111,11 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
-        android:textColorHint="@color/colorOrange"
-        app:boxBackgroundColor="#80000000"
-        app:boxStrokeColor="#80000000"
+        android:textColorHint="@color/orange"
+        app:boxBackgroundColor="@color/blackOpacity50"
+        app:boxStrokeColor="@color/blackOpacity50"
         app:endIconMode="password_toggle"
-        app:hintTextColor="#80000000"
+        app:hintTextColor="@color/blackOpacity50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordTextInputLayout">
@@ -127,8 +127,8 @@
             android:drawablePadding="16dp"
             android:hint="Repeat password"
             android:inputType="textPassword"
-            android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorOrange" />
+            android:textColor="@color/white"
+            android:textColorHint="@color/orange" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -136,10 +136,10 @@
         android:id="@+id/signUpButton"
         android:layout_width="0dp"
         android:layout_height="64dp"
-        android:backgroundTint="@color/colorOrange"
+        android:backgroundTint="@color/orange"
         android:text="Sign up"
         android:textAllCaps="false"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -150,6 +150,9 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/orange"
+        android:indeterminateTintMode="src_atop"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -172,9 +175,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:buttonTint="@color/colorBlackOpacity80"
+            android:buttonTint="@color/blackOpacity80"
             android:text="Male"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/white"
             android:textSize="18sp"
             tools:checked="true" />
 
@@ -183,9 +186,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:buttonTint="@color/colorBlackOpacity80"
+            android:buttonTint="@color/blackOpacity80"
             android:text="Female"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/white"
             android:textSize="18sp" />
 
     </RadioGroup>

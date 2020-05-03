@@ -29,8 +29,7 @@ class RegistrationViewModel(
         registrationUiMutableState.value = RegistrationUiState.Loading
 
         CoroutineScope(coroutineContext).launch {
-            when (val result = signUpUseCase.
-                signUp(user)) {
+            when (val result = signUpUseCase.signUp(user)) {
                 is Result.Success -> {
                     registrationUiMutableState.value = RegistrationUiState.Success(result.value)
                     Log.i("TAG", result.value.toString())
@@ -39,6 +38,7 @@ class RegistrationViewModel(
             }
         }
     }
+
     override fun onCleared() {
         super.onCleared()
 

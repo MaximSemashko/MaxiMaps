@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">MaxiMaps</string>
-    <string name="title_login">Module Title</string>
-    <string name="see_all"><u>See all</u></string>
-    <string name="popular_travellers">Popular travellers</string>
     <string name="maps">Maps</string>
     <string name="chat">Chat</string>
     <string name="events">Events</string>

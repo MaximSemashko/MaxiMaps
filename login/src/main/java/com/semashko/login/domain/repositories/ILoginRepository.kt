@@ -1,8 +1,8 @@
 package com.semashko.login.domain.repositories
 
+import com.semashko.extensions.utils.Result
 import com.semashko.login.data.entities.LoginResponse
 import com.semashko.login.data.entities.User
-import com.semashko.extensions.utils.Result
 
 interface ILoginRepository {
 

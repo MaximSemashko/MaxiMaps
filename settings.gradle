@@ -1,3 +1,2 @@
-include ':app', ':login', ':registration', ':commonResources', ':extensions', ':network'
+include ':app', ':login', ':registration', ':commonResources', ':extensions', ':network', ':homePage', ':provider', ':seealldetailspage'
 rootProject.name = 'MaxiMaps'
-
