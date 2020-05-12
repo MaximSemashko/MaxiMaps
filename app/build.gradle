@@ -53,4 +53,5 @@ dependencies {
     implementation project(':seealldetailspage')
     implementation project(':provider')
     implementation project(':itemDetailsPage')
+    implementation project(':maps')
 }

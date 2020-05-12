@@ -54,4 +54,5 @@ dependencies {
     implementation 'com.yandex.android:transport:3.5.0'
 
     implementation project(':provider')
+    implementation project(':commonResources')
 }
