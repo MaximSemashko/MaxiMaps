@@ -13,6 +13,7 @@ import com.semashko.itemdetailspage.presentation.RecommendationsUiState
 import com.semashko.itemdetailspage.presentation.adapters.PhotosAdapter
 import com.semashko.itemdetailspage.presentation.adapters.RecommendedItemsAdapter
 import com.semashko.itemdetailspage.presentation.viewmodels.RecommendationsViewModel
+import com.semashko.maps.MapsActivity
 import com.semashko.provider.BaseItemDecoration
 import com.semashko.provider.models.home.Attractions
 import com.semashko.provider.models.home.HomeModel
@@ -48,6 +49,7 @@ class ItemDetailsPageFragment : Fragment(R.layout.fragment_item_details_page) {
         initToolbar()
         initPhotosRecyclerView()
         initRecommendedRecyclerView()
+        initShowOnMapButton()
 
         viewModel.recommendationsData.observe(viewLifecycleOwner, Observer {
             when (it) {
@@ -60,6 +62,11 @@ class ItemDetailsPageFragment : Fragment(R.layout.fragment_item_details_page) {
         viewModel.loadRecommendations()
     }
 
+    private fun initShowOnMapButton() {
+        showOnMapButton.setOnClickListener {
+            MapsActivity.startActivity(requireContext(), null)
+        }
+    }
     private fun initToolbar() {
         toolbar.title = itemNameView.text
         toolbar.navigationIcon = resources.getDrawable(R.drawable.ic_action_back)

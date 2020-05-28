@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.semashko.maximaps"
         minSdkVersion 22
@@ -53,6 +53,7 @@ dependencies {
     implementation project(':seealldetailspage')
     implementation project(':provider')
     implementation project(':itemDetailsPage')
+    implementation project(':maps')
     implementation project(':bookmarks')
     implementation project(':profile')
 }

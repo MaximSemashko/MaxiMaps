@@ -1,3 +1,4 @@
 include ':app', ':login', ':bookmarks', ':registration', ':commonResources', ':extensions', ':network', ':homePage', ':provider', ':seealldetailspage', ':itemDetailsPage'
 rootProject.name = 'MaxiMaps'
+include ':maps'
 include ':profile'
