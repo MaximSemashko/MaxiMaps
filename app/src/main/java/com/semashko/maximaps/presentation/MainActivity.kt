@@ -10,6 +10,7 @@ import com.semashko.bookmarks.presentation.fragments.BookmarksFragment
 import com.semashko.homepage.presentation.fragments.HomeFragment
 import com.semashko.itemdetailspage.presentation.fragments.ItemDetailsPageFragment
 import com.semashko.maximaps.R
+import com.semashko.profile.presentation.fragments.ProfileFragment
 import com.semashko.provider.models.home.Attractions
 import com.semashko.provider.models.home.HomeModel
 import com.semashko.provider.models.home.Mansions
@@ -68,8 +69,8 @@ class MainActivity : AppCompatActivity() {
         val listOfFragments =
             listOf(
                 SeeAllFragment.newInstance(HomeModel(routes = touristsRoutesList)),
-                BookmarksFragment.newInstance(),
                 HomeFragment(),
+                ProfileFragment.newInstance(),
                 ItemDetailsPageFragment.newInstance(HomeModel(mansions = mansionsList))
             )
 

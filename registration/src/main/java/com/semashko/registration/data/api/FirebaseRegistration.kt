@@ -45,7 +45,7 @@ class FirebaseRegistration {
             jsonString
         )
 
-        val url = "https://maximaps.firebaseio.com/${localId}.json"
+        val url = "https://maximaps.firebaseio.com/users/${localId}.json"
 
         val request = Request.Builder()
             .url(url)

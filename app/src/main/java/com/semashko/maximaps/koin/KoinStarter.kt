@@ -5,6 +5,7 @@ import com.semashko.bookmarks.koin.bookmarksModule
 import com.semashko.homepage.koin.homeModule
 import com.semashko.itemdetailspage.koin.recommendationsModule
 import com.semashko.login.koin.loginModule
+import com.semashko.profile.koin.profileModule
 import com.semashko.registration.koin.registrationModule
 import com.semashko.seealldetailspage.koin.seeAllModule
 import org.koin.android.ext.koin.androidContext
@@ -17,7 +18,8 @@ val koinModules = listOf(
     homeModule,
     seeAllModule,
     recommendationsModule,
-    bookmarksModule
+    bookmarksModule,
+    profileModule
 )
 
 fun Application.initKoin() {
