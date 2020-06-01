@@ -15,6 +15,7 @@ import com.semashko.provider.models.home.Attractions
 import com.semashko.provider.models.home.HomeModel
 import com.semashko.provider.models.home.Mansions
 import com.semashko.provider.models.home.TouristsRoutes
+import com.semashko.searchfragment.presentation.fragments.SearchFragment
 import com.semashko.seealldetailspage.presentation.fragments.SeeAllFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -68,7 +69,7 @@ class MainActivity : AppCompatActivity() {
     private fun initViewPager() {
         val listOfFragments =
             listOf(
-                SeeAllFragment.newInstance(HomeModel(routes = touristsRoutesList)),
+                SearchFragment(),
                 HomeFragment(),
                 ProfileFragment.newInstance(),
                 ItemDetailsPageFragment.newInstance(HomeModel(mansions = mansionsList))
