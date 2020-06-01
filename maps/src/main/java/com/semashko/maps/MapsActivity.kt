@@ -49,7 +49,6 @@ class MapsActivity : AppCompatActivity(), DrivingSession.DrivingRouteListener {
     private val locationCallback: LocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             val lastLocation: Location = locationResult.getLastLocation()
-            //TODO
         }
     }
 
@@ -142,7 +141,6 @@ class MapsActivity : AppCompatActivity(), DrivingSession.DrivingRouteListener {
         if (requestCode == PERMISSION_ID) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Granted. Start getting the location information
-                //TODO
             }
         }
     }
@@ -196,7 +194,6 @@ class MapsActivity : AppCompatActivity(), DrivingSession.DrivingRouteListener {
     }
 
     private fun submitRequest() {
-        //TODO
         val options = DrivingOptions()
         val requestPoints = java.util.ArrayList<RequestPoint>()
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.semashko.registration">
+    package="com.semashko.maximaps">
 
     <application>
-        <activity android:name=".presentation.RegistrationActivity"></activity>
+        <activity android:name="com.semashko.maximaps.presentation.RegistrationActivity"></activity>
     </application>
 
 </manifest>

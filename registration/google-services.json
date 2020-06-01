@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "200451422607",
+    "firebase_url": "https://maximaps.firebaseio.com",
+    "project_id": "maximaps",
+    "storage_bucket": "maximaps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200451422607:android:4710bad3e738e4cde4f3fa",
+        "android_client_info": {
+          "package_name": "com.semashko.maximaps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200451422607-fp2o3q0aahfv9fjvbbd46tbmu51jsip1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.semashko.maximaps",
+            "certificate_hash": "c7cf71c55c4b15c7404da915441d79aad10c0249"
+          }
+        },
+        {
+          "client_id": "200451422607-ekc5sfa3vs81grf6qi6uvrkhfcppmeem.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_C-Q_Ekmvovyg45YQw7txUzwO2fKm8eA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200451422607-ekc5sfa3vs81grf6qi6uvrkhfcppmeem.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
