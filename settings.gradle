@@ -2,3 +2,4 @@ include ':app', ':login', ':bookmarks', ':registration', ':commonResources', ':e
 rootProject.name = 'MaxiMaps'
 include ':maps'
 include ':profile'
+include ':searchFragment'
