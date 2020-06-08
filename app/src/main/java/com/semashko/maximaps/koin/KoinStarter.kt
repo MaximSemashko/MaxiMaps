@@ -6,6 +6,7 @@ import com.semashko.dialogs.koin.dialogsModule
 import com.semashko.homepage.koin.homeModule
 import com.semashko.itemdetailspage.koin.recommendationsModule
 import com.semashko.login.koin.loginModule
+import com.semashko.maximaps.module.chatModule
 import com.semashko.profile.koin.profileModule
 import com.semashko.registration.koin.registrationModule
 import com.semashko.searchfragment.koin.searchModule
@@ -23,7 +24,8 @@ val koinModules = listOf(
     bookmarksModule,
     profileModule,
     searchModule,
-    dialogsModule
+    dialogsModule,
+    chatModule
 )
 
 fun Application.initKoin() {

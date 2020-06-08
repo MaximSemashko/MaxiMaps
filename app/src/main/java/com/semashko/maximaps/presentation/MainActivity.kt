@@ -6,10 +6,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.semashko.dialogs.presentation.fragments.DialogsFragment
 import com.semashko.homepage.presentation.fragments.HomeFragment
 import com.semashko.itemdetailspage.presentation.fragments.ItemDetailsPageFragment
 import com.semashko.maximaps.R
+import com.semashko.maximaps.presentation.chatroom.ChatFragment
 import com.semashko.profile.presentation.fragments.ProfileFragment
 import com.semashko.provider.models.home.Attractions
 import com.semashko.provider.models.home.HomeModel
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     private fun initViewPager() {
         val listOfFragments =
             listOf(
-                DialogsFragment(),
+                ChatFragment(),
                 HomeFragment(),
                 ProfileFragment.newInstance(),
                 ItemDetailsPageFragment.newInstance(HomeModel(mansions = mansionsList))
