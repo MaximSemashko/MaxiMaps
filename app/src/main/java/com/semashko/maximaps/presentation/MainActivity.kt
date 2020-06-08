@@ -3,9 +3,8 @@ package com.semashko.maximaps.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.semashko.homepage.presentation.fragments.HomeFragment
 import com.semashko.itemdetailspage.presentation.fragments.ItemDetailsPageFragment
 import com.semashko.maximaps.R
@@ -22,6 +21,12 @@ class MainActivity : AppCompatActivity() {
     private val touristsRoutesList = ArrayList<TouristsRoutes>()
     private val attractionsList = ArrayList<Attractions>()
     private val mansionsList = ArrayList<Mansions>()
+
+    private val onPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            bottomNavigationViewLinear.setCurrentActiveItem(position)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,45 +79,33 @@ class MainActivity : AppCompatActivity() {
             )
 
         val screenSlidePagerAdapter = ScreenSlidePagerAdapter(
-            listOfFragments,
-            supportFragmentManager
+            this,
+            listOfFragments
         )
 
         viewPager.apply {
             adapter = screenSlidePagerAdapter
-            addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-
-                override fun onPageScrollStateChanged(state: Int) {
-                }
-
-                override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int
-                ) {
-
-                }
-
-                override fun onPageSelected(position: Int) {
-                    bottomNavigationViewLinear.setCurrentActiveItem(position)
-                }
-            })
+            registerOnPageChangeCallback(onPageChangeCallback)
 
             bottomNavigationViewLinear.setNavigationChangeListener { _, position ->
                 viewPager.setCurrentItem(position, true)
             }
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewPager.unregisterOnPageChangeCallback(onPageChangeCallback)
+    }
 }
 
 class ScreenSlidePagerAdapter(
-    private val fragmentList: List<Fragment>,
-    fm: FragmentManager
-) : FragmentStatePagerAdapter(fm) {
+    activity: AppCompatActivity,
+    private val fragmentList: List<Fragment>
+) : FragmentStateAdapter(activity) {
+    override fun getItemCount(): Int = fragmentList.size
 
-    override fun getCount(): Int = fragmentList.size
-
-    override fun getItem(position: Int): Fragment {
+    override fun createFragment(position: Int): Fragment {
         if (position >= 0 && position < fragmentList.size)
             return fragmentList[position]
         return Fragment()
