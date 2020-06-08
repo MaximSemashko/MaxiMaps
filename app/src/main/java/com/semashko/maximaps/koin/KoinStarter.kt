@@ -2,6 +2,7 @@ package com.semashko.maximaps.koin
 
 import android.app.Application
 import com.semashko.bookmarks.koin.bookmarksModule
+import com.semashko.dialogs.koin.dialogsModule
 import com.semashko.homepage.koin.homeModule
 import com.semashko.itemdetailspage.koin.recommendationsModule
 import com.semashko.login.koin.loginModule
@@ -21,7 +22,8 @@ val koinModules = listOf(
     recommendationsModule,
     bookmarksModule,
     profileModule,
-    searchModule
+    searchModule,
+    dialogsModule
 )
 
 fun Application.initKoin() {
