@@ -16,6 +16,7 @@ import org.koin.core.context.KoinContextHandler.getOrNull
 import org.koin.core.context.startKoin
 
 val koinModules = listOf(
+    appModule,
     loginModule,
     registrationModule,
     homeModule,
