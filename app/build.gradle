@@ -59,4 +59,5 @@ dependencies {
     implementation project(':searchFragment')
     implementation project(':dialogs')
     implementation project(':chat')
+    implementation project(':extensions')
 }

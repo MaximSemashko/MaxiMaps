@@ -7,6 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.semashko.homepage.presentation.fragments.HomeFragment
 import com.semashko.itemdetailspage.presentation.fragments.ItemDetailsPageFragment
+import com.semashko.login.presentation.LoginActivity
 import com.semashko.maximaps.R
 import com.semashko.maximaps.presentation.chatroom.ChatFragment
 import com.semashko.profile.presentation.fragments.ProfileFragment
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        LoginActivity.startActivity(this)
         initList()
         initViewPager()
     }
