@@ -8,7 +8,6 @@ import com.semashko.itemdetailspage.koin.recommendationsModule
 import com.semashko.login.koin.loginModule
 import com.semashko.maximaps.module.chatModule
 import com.semashko.profile.koin.profileModule
-import com.semashko.registration.koin.registrationModule
 import com.semashko.searchfragment.koin.searchModule
 import com.semashko.seealldetailspage.koin.seeAllModule
 import org.koin.android.ext.koin.androidContext

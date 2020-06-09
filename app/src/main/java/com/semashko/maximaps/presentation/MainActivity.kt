@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         LoginActivity.startActivity(this)
+
         initList()
         initViewPager()
     }

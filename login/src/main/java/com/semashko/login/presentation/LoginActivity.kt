@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.semashko.extensions.constants.EMPTY
 import com.semashko.extensions.gone
 import com.semashko.extensions.visible
 import com.semashko.login.R
@@ -29,8 +30,8 @@ class LoginActivity : AppCompatActivity() {
             when (it) {
                 is LoginUiState.Loading -> progressBar.visible()
                 is LoginUiState.Success -> {
-                    userInfoPreferences.localId = it.result.localId
-                    userInfoPreferences.token = it.result.token
+                    userInfoPreferences.localId = it.result.localId ?: EMPTY
+                    userInfoPreferences.token = it.result.token ?: EMPTY
 
                     progressBar.gone()
                 }
@@ -42,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
             val email = emailTextInputLayout.editText?.text.toString()
             val password = passwordTextInputLayout.editText?.text.toString()
 
-            viewModel.load(User("max1@mail.ru", "123123"))
+            viewModel.load(User("olya@mail.ru1", "powert"))
         }
     }
 
