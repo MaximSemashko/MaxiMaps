@@ -16,14 +16,25 @@ class SignUpUseCase(
             val signUpAsync = async { signUpRepository.signUp(user) }
 
              val signUpResponse = when (val signUpResult = signUpAsync.await()) {
-                 is Result.Success -> {
-                     async { signUpRepository.addUserToRealtimeDatabase(user, signUpResult.value.localId) }.await()
-                     signUpResult.value
-                 }
+                 is Result.Success -> signUpResult.value
                  is Result.Error -> SignUpResponse()
              }
 
              Result.Success(signUpResponse)
          }
+    }
+
+    override suspend fun addUserToRealtimeDatabase(user: User, localId: String?): Result<User>? {
+        return coroutineScope {
+            val userAsync = async { signUpRepository.addUserToRealtimeDatabase(user, localId) }
+
+            val user = when (val signUpResult = userAsync.await()) {
+                is Result.Success -> signUpResult.value
+                is Result.Error -> User()
+                null -> TODO()
+            }
+
+            Result.Success(user)
+        }
     }
 }

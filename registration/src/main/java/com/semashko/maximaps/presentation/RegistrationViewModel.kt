@@ -6,12 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.semashko.extensions.utils.Result
 import com.semashko.maximaps.data.entities.User
 import com.semashko.maximaps.domain.usecases.ISignUpUseCase
 import kotlinx.coroutines.*
-import java.util.*
 import kotlin.coroutines.CoroutineContext
+
 
 class RegistrationViewModel(
     private val signUpUseCase: ISignUpUseCase
@@ -34,7 +35,15 @@ class RegistrationViewModel(
         CoroutineScope(coroutineContext).launch {
             when (val result = signUpUseCase.signUp(user)) {
                 is Result.Success -> {
-                    user.email?.let { uploadImage(filePath, it) }
+                    signUpUseCase.addUserToRealtimeDatabase(user, result.value.localId)
+                    user.email?.let {
+                        result.value.localId?.let { it1 ->
+                            uploadImage(
+                                filePath,
+                                it1
+                            )
+                        }
+                    }
                     registrationUiMutableState.value = RegistrationUiState.Success(result.value)
                     Log.i("TAG", result.value.toString())
                 }
@@ -44,10 +53,13 @@ class RegistrationViewModel(
     }
 
     private fun uploadImage(filePath: Uri, id: String) {
-        FirebaseStorage.getInstance().reference.apply {
-            child("images/" + id + "/" + UUID.randomUUID().toString())
-            putFile(filePath)
-        }
+        val storageReference: StorageReference = FirebaseStorage.getInstance().reference
+            .child("images/" + id)
+
+        storageReference.putFile(filePath)
+            .addOnSuccessListener {}
+            .addOnFailureListener { }
+            .addOnProgressListener { }
     }
 
     override fun onCleared() {

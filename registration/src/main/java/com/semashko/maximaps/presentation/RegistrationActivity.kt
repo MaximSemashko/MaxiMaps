@@ -13,17 +13,20 @@ import com.semashko.extensions.gone
 import com.semashko.extensions.visible
 import com.semashko.maximaps.R
 import com.semashko.maximaps.data.entities.User
+import com.semashko.provider.preferences.IUserInfoPreferences
 import kotlinx.android.synthetic.main.activity_registration.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.scope.lifecycleScope
 import org.koin.androidx.viewmodel.scope.viewModel
 import java.io.IOException
-
 
 private const val PICK_IMAGE_REQUEST = 22
 
 class RegistrationActivity : AppCompatActivity() {
 
     private val viewModel: RegistrationViewModel by lifecycleScope.viewModel(this)
+
+    private val userInfoPreferences: IUserInfoPreferences by inject()
 
     private lateinit var filePath: Uri
 
@@ -33,11 +36,13 @@ class RegistrationActivity : AppCompatActivity() {
 
         viewModel.registrationData.observe(this, Observer {
             when (it) {
-                is RegistrationUiState.Loading -> {
-                    progressBar.visible()
-                    Log.i("TAG", it.toString())
+                is RegistrationUiState.Loading -> progressBar.visible()
+                is RegistrationUiState.Success -> {
+                    userInfoPreferences.localId = it.result.localId
+                    userInfoPreferences.token = it.result.token
+
+                    progressBar.gone()
                 }
-                is RegistrationUiState.Success -> progressBar.gone()
                 is RegistrationUiState.Error -> progressBar.gone()
             }
         })

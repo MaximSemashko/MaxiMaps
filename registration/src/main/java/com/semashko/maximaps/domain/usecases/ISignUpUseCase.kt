@@ -7,4 +7,6 @@ import com.semashko.maximaps.data.entities.User
 interface ISignUpUseCase {
 
     suspend fun signUp(user: User): Result<SignUpResponse>
+
+    suspend fun addUserToRealtimeDatabase(user: User, localId: String?): Result<User>?
 }

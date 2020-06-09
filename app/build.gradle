@@ -56,4 +56,8 @@ dependencies {
     implementation project(':maps')
     implementation project(':bookmarks')
     implementation project(':profile')
+    implementation project(':searchFragment')
+    implementation project(':dialogs')
+    implementation project(':chat')
+    implementation project(':extensions')
 }
