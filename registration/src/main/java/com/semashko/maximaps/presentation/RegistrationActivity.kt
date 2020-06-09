@@ -6,9 +6,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.semashko.extensions.constants.EMPTY
 import com.semashko.extensions.gone
 import com.semashko.extensions.visible
 import com.semashko.maximaps.R
@@ -38,8 +38,8 @@ class RegistrationActivity : AppCompatActivity() {
             when (it) {
                 is RegistrationUiState.Loading -> progressBar.visible()
                 is RegistrationUiState.Success -> {
-                    userInfoPreferences.localId = it.result.localId
-                    userInfoPreferences.token = it.result.token
+                    userInfoPreferences.localId = it.result.localId ?: EMPTY
+                    userInfoPreferences.token = it.result.token ?: EMPTY
 
                     progressBar.gone()
                 }
