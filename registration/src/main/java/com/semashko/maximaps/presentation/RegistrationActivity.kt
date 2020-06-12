@@ -6,13 +6,17 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.semashko.extensions.action
 import com.semashko.extensions.constants.EMPTY
 import com.semashko.extensions.gone
+import com.semashko.extensions.snack
 import com.semashko.extensions.visible
 import com.semashko.maximaps.R
 import com.semashko.maximaps.data.entities.User
+import com.semashko.provider.navigation.INavigation
 import com.semashko.provider.preferences.IUserInfoPreferences
 import kotlinx.android.synthetic.main.activity_registration.*
 import org.koin.android.ext.android.inject
@@ -27,6 +31,7 @@ class RegistrationActivity : AppCompatActivity() {
     private val viewModel: RegistrationViewModel by lifecycleScope.viewModel(this)
 
     private val userInfoPreferences: IUserInfoPreferences by inject()
+    private val navigation: INavigation by inject()
 
     private lateinit var filePath: Uri
 
@@ -41,14 +46,18 @@ class RegistrationActivity : AppCompatActivity() {
                     userInfoPreferences.localId = it.result.localId ?: EMPTY
                     userInfoPreferences.token = it.result.token ?: EMPTY
 
+                    if (!it.result.localId.isNullOrEmpty() && !it.result.token.isNullOrEmpty()) {
+                        navigation.openMainActivity()
+                    }
+
                     progressBar.gone()
                 }
                 is RegistrationUiState.Error -> progressBar.gone()
             }
         })
 
-        signUpButton.setOnClickListener {
-            viewModel.signUp(initUserModel(), filePath)
+        signUpButton.setOnClickListener { view ->
+            initUserModel(view)?.let { user -> viewModel.signUp(user, filePath) }
         }
 
         selectImageButton.setOnClickListener {
@@ -77,15 +86,30 @@ class RegistrationActivity : AppCompatActivity() {
         }
     }
 
-    private fun initUserModel(): User {
-        return User(
-            name = nameTextInputLayout.editText?.text.toString(),
-            email = emailTextInputLayout.editText?.text.toString(),
-            password = passwordTextInputLayout.editText?.text.toString(),
-            phone = phoneTextInputLayout.editText?.text.toString(),
-            address = addressTextInputLayout.editText?.text.toString(),
-            birthDay = birthdayTextInputLayout.editText?.text.toString()
-        )
+    private fun initUserModel(view: View): User? {
+        val name = nameTextInputLayout.editText?.text.toString()
+        val email = emailTextInputLayout.editText?.text.toString()
+        val password = passwordTextInputLayout.editText?.text.toString()
+        val phone = phoneTextInputLayout.editText?.text.toString()
+        val address = addressTextInputLayout.editText?.text.toString()
+        val birthDay = birthdayTextInputLayout.editText?.text.toString()
+
+        return if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
+            User(
+                name = name,
+                email = email,
+                password = password,
+                phone = phone,
+                address = address,
+                birthDay = birthDay
+            )
+        } else {
+            view.snack("Check your email, name and password!") {
+                action("Close") {}
+            }
+
+            null
+        }
     }
 
     private fun selectImage() {

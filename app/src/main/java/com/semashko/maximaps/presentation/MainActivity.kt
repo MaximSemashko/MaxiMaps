@@ -1,5 +1,7 @@
 package com.semashko.maximaps.presentation
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -15,9 +17,13 @@ import com.semashko.provider.models.home.Attractions
 import com.semashko.provider.models.home.HomeModel
 import com.semashko.provider.models.home.Mansions
 import com.semashko.provider.models.home.TouristsRoutes
+import com.semashko.provider.preferences.IUserInfoPreferences
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
+
+    private val userInfoPreferences: IUserInfoPreferences by inject()
 
     private val touristsRoutesList = ArrayList<TouristsRoutes>()
     private val attractionsList = ArrayList<Attractions>()
@@ -33,7 +39,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        LoginActivity.startActivity(this)
+        if (userInfoPreferences.localId.isNullOrEmpty() || userInfoPreferences.token.isNullOrEmpty()) {
+            LoginActivity.startActivity(this)
+        }
 
         initList()
         initViewPager()
@@ -99,6 +107,15 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         viewPager.unregisterOnPageChangeCallback(onPageChangeCallback)
+    }
+
+    companion object {
+        fun startActivity(context: Context) {
+            with(context) {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 }
 

@@ -3,7 +3,9 @@
     package="com.semashko.maximaps">
 
     <application>
-        <activity android:name="com.semashko.maximaps.presentation.RegistrationActivity"></activity>
+        <activity
+            android:name="com.semashko.maximaps.presentation.RegistrationActivity"
+            android:noHistory="true" />
     </application>
 
 </manifest>
