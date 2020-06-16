@@ -17,6 +17,7 @@ import com.semashko.itemdetailspage.presentation.adapters.RecommendedItemsAdapte
 import com.semashko.itemdetailspage.presentation.viewmodels.RecommendationsViewModel
 import com.semashko.maps.MapsActivity
 import com.semashko.provider.BaseItemDecoration
+import com.semashko.provider.Point
 import com.semashko.provider.models.detailsPage.ItemDetails
 import com.semashko.provider.models.home.Attractions
 import kotlinx.android.synthetic.main.fragment_item_details_page.*
@@ -106,7 +107,10 @@ class ItemDetailsPageFragment : Fragment(R.layout.fragment_item_details_page) {
 
     private fun initShowOnMapButton() {
         showOnMapButton.setOnClickListener {
-            MapsActivity.startActivity(requireContext(), null)
+            MapsActivity.startActivity(
+                requireContext(),
+                itemDetails?.points as ArrayList<Point>?
+            )
         }
     }
 
