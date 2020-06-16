@@ -1,12 +1,21 @@
 package com.semashko.itemdetailspage.data.api
 
 import com.google.gson.Gson
+import com.semashko.provider.models.detailsPage.ItemDetails
 import com.semashko.provider.models.home.Attractions
+import com.semashko.provider.preferences.IUserInfoPreferences
+import com.squareup.okhttp.MediaType
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
+import com.squareup.okhttp.RequestBody
 import org.json.JSONObject
+import org.koin.core.KoinComponent
+import org.koin.core.inject
+import java.io.IOException
 
-class RecommendationsDataApi {
+class RecommendationsDataApi : KoinComponent {
+    private val userInfoPreferences: IUserInfoPreferences by inject()
+
     private val client = OkHttpClient()
     private val gson = Gson()
 
@@ -35,5 +44,20 @@ class RecommendationsDataApi {
 
             attractions
         }
+    }
+
+    @Throws(IOException::class)
+    fun addItemToBookmarks(itemDetails: ItemDetails): Boolean {
+        val jsonString = Gson().toJson(itemDetails).toString()
+        val body =
+            RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonString)
+        val request = Request.Builder()
+            .url("https://maximaps.firebaseio.com/${userInfoPreferences.localId}/Bookmarks.json")
+            .post(body)
+            .build()
+
+        val response = OkHttpClient().newCall(request).execute()
+
+        return response.isSuccessful
     }
 }

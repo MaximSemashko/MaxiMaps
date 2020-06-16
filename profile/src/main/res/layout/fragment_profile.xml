@@ -78,8 +78,11 @@
                         android:background="@drawable/profile_bk" />
 
                     <TextView
+                        android:id="@+id/exitButton"
+                        android:textSize="18sp"
+                        android:gravity="center_horizontal"
                         style="@style/profileStyledBackButton"
-                        android:text="Back to\nHome" />
+                        android:text="Exit" />
                 </RelativeLayout>
 
             </LinearLayout>

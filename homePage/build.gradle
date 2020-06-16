@@ -60,4 +60,5 @@ dependencies {
     implementation project(':network')
     implementation project(':seealldetailspage')
     implementation project(':itemDetailsPage')
+    implementation project(':searchFragment')
 }

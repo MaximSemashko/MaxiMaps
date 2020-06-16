@@ -2,7 +2,6 @@ package com.semashko.seealldetailspage.presentation.fragments
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -98,8 +97,11 @@ class SeeAllFragment : Fragment(R.layout.fragment_see_all) {
     private fun initToolbar() {
         toolbar.navigationIcon = resources.getDrawable(R.drawable.ic_action_back)
         toolbar.setNavigationOnClickListener {
-            //TODO
-            Toast.makeText(requireContext(), "back button", Toast.LENGTH_SHORT).show()
+            activity
+                ?.supportFragmentManager
+                ?.beginTransaction()
+                ?.remove(this)
+                ?.commit()
         }
 
         when {
@@ -118,6 +120,7 @@ class SeeAllFragment : Fragment(R.layout.fragment_see_all) {
     private fun initRecyclerView() {
         seeAllAdapter =
             SeeAllAdapter(
+                activity,
                 requireContext(),
                 attractions = homeModel?.attractions,
                 mansions = homeModel?.mansions,

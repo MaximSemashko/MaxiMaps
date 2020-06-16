@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.semashko.extensions.constants.EMPTY
 import com.semashko.extensions.gone
 import com.semashko.extensions.visible
 import com.semashko.profile.R
@@ -29,39 +30,35 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 is ProfileUiState.Loading -> progressBar.visible()
                 is ProfileUiState.Success -> {
                     progressBar.gone()
-//                    initUserInfo(it.user)
+                    initUserInfo(it.user)
                 }
                 is ProfileUiState.Error -> progressBar.gone()
             }
         })
 
-        initUserInfo(
-            User(
-                name = "name",
-                phone = "phone",
-                email = "email",
-                address = "address",
-                birthDay = "birthDay",
-                profileImageUrl = "https://picsum.photos/seed/picsum/100/100"
-            )
-        )
-
+        initExitButton()
         viewModel.loadModel()
+    }
+
+    private fun initExitButton() {
+        exitButton.setOnClickListener {
+            ExitDialogFragment.confirmExit(childFragmentManager)
+        }
     }
 
     private fun initUserInfo(user: User) {
         Glide.with(this)
-            .load(user.profileImageUrl)
+            .load(user.imageUrl)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(profileImageView)
 
-        profileNameTextView.text = user.name
-        profileEmailTextView.text = user.email
-        profileNameView.text = user.name
-        profilePhoneView.text = user.phone
-        profileEmailView.text = user.email
-        profileAddressView.text = user.address
-        profileBirthDayView.text = user.birthDay
+        profileNameTextView.text = user.name ?: EMPTY
+        profileEmailTextView.text = user.email ?: EMPTY
+        profileNameView.text = user.name ?: EMPTY
+        profilePhoneView.text = user.phone ?: EMPTY
+        profileEmailView.text = user.email ?: EMPTY
+        profileAddressView.text = user.address ?: EMPTY
+        profileBirthDayView.text = user.birthDay ?: EMPTY
     }
 
     companion object {

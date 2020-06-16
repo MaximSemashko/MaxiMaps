@@ -2,13 +2,16 @@ package com.semashko.searchfragment.presentation.fragments
 
 import android.os.Bundle
 import android.text.TextWatcher
+import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.Slide
 import com.semashko.extensions.gone
+import com.semashko.extensions.toEditable
 import com.semashko.extensions.utils.EmptyTextWatcher
 import com.semashko.extensions.utils.ScrollToEndListener
 import com.semashko.extensions.visible
@@ -22,11 +25,14 @@ import kotlinx.android.synthetic.main.fragment_search.*
 import org.koin.androidx.scope.lifecycleScope
 import org.koin.androidx.viewmodel.scope.viewModel
 
+private const val SEARCH_INPUT = "SEARCH_INPUT"
+
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private val viewModel: SearchViewModel by lifecycleScope.viewModel(this)
 
     private lateinit var adapter: SearchAdapter
+    private var searchInput: String? = null
 
     private val programsScrollListener: RecyclerView.OnScrollListener =
         ScrollToEndListener {
@@ -40,12 +46,24 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            searchInput = it.getString(SEARCH_INPUT)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setViewModelObserver()
         initRecycler()
         searchText.addTextChangedListener(textWatcher)
+
+        if (searchInput != null) {
+            searchText.text = searchInput.toEditable()
+        }
 
         viewModel.load()
     }
@@ -57,7 +75,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun initRecycler() {
-        adapter = SearchAdapter(requireContext())
+        adapter = SearchAdapter(activity, requireContext())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.addItemDecoration(
@@ -134,4 +152,15 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private fun load() = viewModel.load(searchText.text.toString())
 
     private fun loadMore() = viewModel.loadMore()
+
+    companion object {
+        fun newInstance(searchInput: String? = null) =
+            SearchFragment().apply {
+                arguments = Bundle().apply {
+                    putString(SEARCH_INPUT, searchInput)
+                    enterTransition = Slide(Gravity.TOP)
+                    exitTransition = Slide(Gravity.BOTTOM)
+                }
+            }
+    }
 }

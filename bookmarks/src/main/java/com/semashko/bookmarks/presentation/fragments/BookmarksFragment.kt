@@ -6,12 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.semashko.bookmarks.R
-import com.semashko.bookmarks.data.entities.Bookmarks
 import com.semashko.bookmarks.presentation.BookmarksUiState
 import com.semashko.bookmarks.presentation.BookmarksViewModel
 import com.semashko.bookmarks.presentation.adapters.BookmarksAdapter
-import com.semashko.extensions.gone
-import com.semashko.extensions.visible
 import com.semashko.provider.BaseItemDecoration
 import kotlinx.android.synthetic.main.fragment_bookmarks.*
 import org.koin.androidx.scope.lifecycleScope
@@ -21,8 +18,6 @@ class BookmarksFragment : Fragment(R.layout.fragment_bookmarks) {
 
     private val viewModel: BookmarksViewModel by lifecycleScope.viewModel(this)
 
-    private val bookmarks = ArrayList<Bookmarks>()
-
     private lateinit var bookmarksAdapter: BookmarksAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,39 +25,41 @@ class BookmarksFragment : Fragment(R.layout.fragment_bookmarks) {
 
         viewModel.bookmarksData.observe(viewLifecycleOwner, Observer {
             when (it) {
-                is BookmarksUiState.Loading -> progressBar.visible()
-                is BookmarksUiState.Success -> progressBar.gone()
-                is BookmarksUiState.Error -> progressBar.gone()
+                is BookmarksUiState.Loading -> swipeRefreshLayout.isRefreshing = true
+                is BookmarksUiState.Success -> {
+                    swipeRefreshLayout.isRefreshing = false
+                    bookmarksAdapter.setItems(it.bookmarks)
+                }
+                is BookmarksUiState.Error -> swipeRefreshLayout.isRefreshing = false
             }
         })
 
         viewModel.load()
 
-        for (i in 1..1000) {
-            bookmarks.add(
-                Bookmarks(
-                    name = "name",
-                    type = "name",
-                    description = "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-                    imageUrl = "https://picsum.photos/seed/picsum/800/800"
-                )
-            )
+        initRecyclerView()
+        initToolbar()
+        initSwipeToRefreshLayout()
+    }
+
+    private fun initSwipeToRefreshLayout() {
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.load()
         }
 
-        initRecyclerView(bookmarks)
-        initToolbar()
+        swipeRefreshLayout.setColorSchemeResources(
+            android.R.color.holo_blue_bright,
+            android.R.color.holo_green_light,
+            android.R.color.holo_orange_light,
+            android.R.color.holo_red_light
+        )
     }
 
     private fun initToolbar() {
         toolbar.title = "Bookmarks"
     }
 
-    private fun initRecyclerView(bookmarks: List<Bookmarks>) {
-        bookmarksAdapter =
-            BookmarksAdapter(
-                requireContext(),
-                bookmarks
-            )
+    private fun initRecyclerView() {
+        bookmarksAdapter = BookmarksAdapter(activity, R.id.bookmarkContainer)
 
         bookmarksRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

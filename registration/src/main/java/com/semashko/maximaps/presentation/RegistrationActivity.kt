@@ -3,6 +3,7 @@ package com.semashko.maximaps.presentation
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -22,7 +23,6 @@ import kotlinx.android.synthetic.main.activity_registration.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.scope.lifecycleScope
 import org.koin.androidx.viewmodel.scope.viewModel
-import java.io.IOException
 
 private const val PICK_IMAGE_REQUEST = 22
 
@@ -38,6 +38,7 @@ class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         viewModel.registrationData.observe(this, Observer {
             when (it) {
@@ -61,28 +62,22 @@ class RegistrationActivity : AppCompatActivity() {
         }
 
         selectImageButton.setOnClickListener {
-            selectImage()
+            openGallery()
         }
+    }
+
+    private fun openGallery() {
+        val gallery =
+            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        startActivityForResult(gallery, PICK_IMAGE_REQUEST)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
-
-            filePath = data.data!!
-
-            try {
-                val bitmap = MediaStore.Images.Media
-                    .getBitmap(
-                        contentResolver,
-                        filePath
-                    )
-                profileImageView.setImageBitmap(bitmap)
-            } catch (e: IOException) {
-
-                e.printStackTrace()
-            }
+        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE_REQUEST) {
+            filePath = data?.data ?: Uri.EMPTY
+            profileImageView.setImageURI(filePath)
         }
     }
 

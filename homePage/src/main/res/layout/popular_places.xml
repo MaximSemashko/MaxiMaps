@@ -76,6 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/touristsRoutesRecyclerView"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="Mansions"
         android:textColor="@color/black" />
 
@@ -85,7 +86,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/touristsRoutesRecyclerView"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="14dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:clickable="true"
         android:focusable="true"
         android:text="See all"

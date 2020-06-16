@@ -40,15 +40,15 @@
             app:bt_title="Home" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
-            android:id="@+id/eventsPage"
+            android:id="@+id/bookmarksPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:bt_active="true"
             app:bt_colorActive="@color/orangeOpacity80"
             app:bt_colorInactive="@color/grey"
-            app:bt_icon="@drawable/ic_events"
+            app:bt_icon="@drawable/ic_saved"
             app:bt_shape="@drawable/transition_background_drawable"
-            app:bt_title="Events" />
+            app:bt_title="Saved" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/chatPage"

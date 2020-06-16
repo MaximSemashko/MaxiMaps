@@ -35,7 +35,13 @@ class RegistrationViewModel(
         CoroutineScope(coroutineContext).launch {
             when (val result = signUpUseCase.signUp(user)) {
                 is Result.Success -> {
-                    signUpUseCase.addUserToRealtimeDatabase(user, result.value.localId)
+                    signUpUseCase.addUserToRealtimeDatabase(
+                        user = user.copy(
+                            localId = result.value.localId,
+                            imageUrl = "https://firebasestorage.googleapis.com/v0/b/maximaps.appspot.com/o/${result.value.localId}?alt=media"
+                        ),
+                        localId = result.value.localId
+                    )
                     user.email?.let {
                         result.value.localId?.let { it1 ->
                             uploadImage(
@@ -54,7 +60,7 @@ class RegistrationViewModel(
 
     private fun uploadImage(filePath: Uri, id: String) {
         val storageReference: StorageReference = FirebaseStorage.getInstance().reference
-            .child("images/" + id)
+            .child(id)
 
         storageReference.putFile(filePath)
             .addOnSuccessListener {}

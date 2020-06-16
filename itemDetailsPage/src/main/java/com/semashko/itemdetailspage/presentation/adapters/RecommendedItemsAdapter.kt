@@ -36,7 +36,7 @@ class RecommendedItemsAdapter(
         holder.bind(attractions[position])
 
         Glide.with(context)
-            .load(attractions[position].imageUrl)
+            .load(attractions[position].imagesUrls)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(holder.itemView.recommendedImageView)
 
