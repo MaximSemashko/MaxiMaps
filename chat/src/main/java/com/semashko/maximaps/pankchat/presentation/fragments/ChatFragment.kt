@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.semashko.extensions.constants.EMPTY
 import com.semashko.maximaps.R
 import com.semashko.maximaps.pankchat.common.EditTextListener
 import com.semashko.maximaps.pankchat.data.entities.Message
@@ -56,7 +57,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat_room), KoinComponent {
                 is MessagesUiState.Loading -> swipeRefreshLayout.isRefreshing = true
                 is MessagesUiState.Success -> {
                     swipeRefreshLayout.isRefreshing = false
-                    setItems(it.messages)
+                    setItems(it.messages.filter { message -> message.toLocalId == user?.localId })
                 }
                 is MessagesUiState.Error -> swipeRefreshLayout.isRefreshing = false
             }
@@ -109,7 +110,10 @@ class ChatFragment : Fragment(R.layout.fragment_chat_room), KoinComponent {
 
             userInfoPreferences.localId?.let { localId ->
                 viewModel.sendMessage(
-                    message,
+                    message.copy(
+                        toLocalId = user?.localId,
+                        userName = userInfoPreferences.name
+                    ),
                     localId = localId
                 )
             }
@@ -117,15 +121,23 @@ class ChatFragment : Fragment(R.layout.fragment_chat_room), KoinComponent {
             Handler().postDelayed({
                 user?.localId?.let { localId ->
                     viewModel.sendMessage(
-                        message,
+                        message.copy(
+                            toLocalId = userInfoPreferences.localId,
+                            userName = user?.name
+                        ),
                         localId = localId
                     )
                 }
             }, 250)
 
-            sendMessage(message)
+            sendMessage(message.copy(userName = userInfoPreferences.name))
 
-            messageText?.setText("")
+            messageText?.setText(EMPTY)
+
+            Handler().postDelayed({
+                viewModel.loadMessages()
+            }, 3_000)
+
         }
     }
 

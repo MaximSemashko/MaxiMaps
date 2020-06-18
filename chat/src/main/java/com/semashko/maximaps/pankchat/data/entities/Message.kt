@@ -18,5 +18,8 @@ data class Message(
     val message: String? = null,
 
     @SerializedName("timestamp")
-    val timestamp: Long? = null
+    val timestamp: Long? = null,
+
+    @SerializedName("toLocalId")
+    val toLocalId: String? = null
 ) : Parcelable

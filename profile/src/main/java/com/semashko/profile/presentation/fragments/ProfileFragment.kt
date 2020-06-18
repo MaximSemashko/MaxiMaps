@@ -14,6 +14,7 @@ import com.semashko.profile.presentation.ProfileUiState
 import com.semashko.profile.presentation.viewmodels.ProfileViewModel
 import com.semashko.provider.models.User
 import com.semashko.provider.navigation.INavigation
+import com.semashko.provider.preferences.IUserInfoPreferences
 import kotlinx.android.synthetic.main.content_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.androidx.scope.lifecycleScope

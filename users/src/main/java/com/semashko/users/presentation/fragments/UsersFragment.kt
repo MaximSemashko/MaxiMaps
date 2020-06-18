@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.semashko.provider.BaseItemDecoration
+import com.semashko.provider.preferences.IUserInfoPreferences
 import com.semashko.users.R
 import com.semashko.users.presentation.UsersUiState
 import com.semashko.users.presentation.UsersViewModel
@@ -13,8 +14,12 @@ import com.semashko.users.presentation.adapters.UsersAdapter
 import kotlinx.android.synthetic.main.fragment_users.*
 import org.koin.androidx.scope.lifecycleScope
 import org.koin.androidx.viewmodel.scope.viewModel
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class UsersFragment : Fragment(R.layout.fragment_users) {
+class UsersFragment : Fragment(R.layout.fragment_users), KoinComponent {
+
+    private val userInfoPreferences: IUserInfoPreferences by inject()
 
     private val viewModel: UsersViewModel by lifecycleScope.viewModel(this)
 
@@ -28,7 +33,12 @@ class UsersFragment : Fragment(R.layout.fragment_users) {
                 is UsersUiState.Loading -> swipeRefreshLayout.isRefreshing = true
                 is UsersUiState.Success -> {
                     swipeRefreshLayout.isRefreshing = false
-                    usersAdapter.setItems(it.bookmarks)
+                    it.users.forEach { user ->
+                        if (user.localId == userInfoPreferences.localId) {
+                            userInfoPreferences.name = user.name
+                        }
+                    }
+                    usersAdapter.setItems(it.users.filter { user -> user.localId != userInfoPreferences.localId })
                 }
                 is UsersUiState.Error -> swipeRefreshLayout.isRefreshing = false
             }
