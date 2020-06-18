@@ -70,30 +70,30 @@ class AddCommentFragment : Fragment(R.layout.fragment_add_comment), KoinComponen
         initSendButton()
         initToolbar()
 
-        thread {
-            val itemDetailsList = itemDetails?.reviews as ArrayList<Reviews>
-            itemDetailsList.add(initReview())
-            addItemToBookmarks(
-                itemDetailsList
-            )
-        }
+//        thread {
+//            val itemDetailsList = itemDetails?.reviews as ArrayList<Reviews>
+//            itemDetailsList.add(initReview())
+//            addItemToBookmarks(
+//                itemDetailsList
+//            )
+//        }
     }
 
-    @Throws(IOException::class)
-    fun addItemToBookmarks(reviews: List<Reviews>): Boolean {
-        val jsonString = Gson().toJson(reviews).toString()
-
-        val body =
-            RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonString)
-        val request = Request.Builder()
-            .url("https://maximaps.firebaseio.com/TouristsRoutes/-M9ophUmsNKLBGDaU01K/reviews.json")
-            .put(body)
-            .build()
-
-        val response = OkHttpClient().newCall(request).execute()
-
-        return response.isSuccessful
-    }
+//    @Throws(IOException::class)
+//    fun addItemToBookmarks(reviews: List<Reviews>): Boolean {
+//        val jsonString = Gson().toJson(reviews).toString()
+//
+//        val body =
+//            RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonString)
+//        val request = Request.Builder()
+//            .url("https://maximaps.firebaseio.com/TouristsRoutes/-M9ophUmsNKLBGDaU01K/reviews.json")
+//            .put(body)
+//            .build()
+//
+//        val response = OkHttpClient().newCall(request).execute()
+//
+//        return response.isSuccessful
+//    }
 
 
     private fun initSendButton() {
