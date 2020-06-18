@@ -28,4 +28,16 @@ interface INavigation {
         activity: FragmentActivity?,
         itemDetails: ItemDetails?
     )
+
+    fun openUserProfile(
+        containerViewId: Int? = null,
+        activity: FragmentActivity?,
+        user: Any?
+    )
+
+    fun openChatFragment(
+        containerViewId: Int? = null,
+        activity: FragmentActivity?,
+        user: Any?
+    )
 }

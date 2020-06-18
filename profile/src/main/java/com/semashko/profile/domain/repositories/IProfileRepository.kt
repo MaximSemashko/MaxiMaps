@@ -1,7 +1,7 @@
 package com.semashko.profile.domain.repositories
 
 import com.semashko.extensions.utils.Result
-import com.semashko.profile.data.entities.User
+import com.semashko.provider.models.User
 
 interface IProfileRepository {
 

@@ -9,6 +9,8 @@ import com.semashko.itemdetailspage.presentation.fragments.ItemDetailsPageFragme
 import com.semashko.login.presentation.LoginActivity
 import com.semashko.maximaps.presentation.MainActivity
 import com.semashko.maximaps.presentation.RegistrationActivity
+import com.semashko.maximaps.presentation.chatroom.ChatFragment
+import com.semashko.profile.presentation.fragments.ProfileFragment
 import com.semashko.provider.models.detailsPage.ItemDetails
 import com.semashko.provider.navigation.INavigation
 
@@ -71,5 +73,34 @@ class Navigation(private val context: Context) : INavigation {
                 ?.addToBackStack(null)
                 ?.commit()
         }
+    }
+
+    override fun openUserProfile(containerViewId: Int?, activity: FragmentActivity?, user: Any?) {
+        containerViewId?.let {
+            activity
+                ?.supportFragmentManager
+                ?.beginTransaction()
+                ?.replace(
+                    it,
+                    ProfileFragment.newInstance(user as com.semashko.provider.models.User)
+                )
+                ?.addToBackStack(null)
+                ?.commit()
+        }
+    }
+
+    override fun openChatFragment(containerViewId: Int?, activity: FragmentActivity?, user: Any?) {
+        containerViewId?.let {
+            activity
+                ?.supportFragmentManager
+                ?.beginTransaction()
+                ?.replace(
+                    it,
+                    ChatFragment.newInstance(user as com.semashko.provider.models.User)
+                )
+                ?.addToBackStack(null)
+                ?.commit()
+        }
+
     }
 }

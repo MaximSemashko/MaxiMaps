@@ -1,7 +1,10 @@
-package com.semashko.profile.data.entities
+package com.semashko.provider.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class User(
     @SerializedName("name")
     val name: String? = null,
@@ -20,4 +23,4 @@ data class User(
 
     @SerializedName("imageUrl")
     val imageUrl: String? = null
-)
+) : Parcelable

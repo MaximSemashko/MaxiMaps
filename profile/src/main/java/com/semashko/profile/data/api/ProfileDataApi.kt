@@ -1,7 +1,7 @@
 package com.semashko.profile.data.api
 
 import com.google.gson.Gson
-import com.semashko.profile.data.entities.User
+import com.semashko.provider.models.User
 import com.semashko.provider.preferences.IUserInfoPreferences
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request

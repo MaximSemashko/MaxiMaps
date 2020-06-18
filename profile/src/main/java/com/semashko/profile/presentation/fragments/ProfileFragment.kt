@@ -10,34 +10,63 @@ import com.semashko.extensions.constants.EMPTY
 import com.semashko.extensions.gone
 import com.semashko.extensions.visible
 import com.semashko.profile.R
-import com.semashko.profile.data.entities.User
 import com.semashko.profile.presentation.ProfileUiState
 import com.semashko.profile.presentation.viewmodels.ProfileViewModel
+import com.semashko.provider.models.User
+import com.semashko.provider.navigation.INavigation
 import kotlinx.android.synthetic.main.content_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.androidx.scope.lifecycleScope
 import org.koin.androidx.viewmodel.scope.viewModel
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class ProfileFragment : Fragment(R.layout.fragment_profile) {
+private const val USER_MODEL = "USER_MODEL"
+
+class ProfileFragment : Fragment(R.layout.fragment_profile), KoinComponent {
 
     private val viewModel: ProfileViewModel by lifecycleScope.viewModel(this)
+    private val navigation: INavigation by inject()
+
+    private var userModel: User? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            userModel = it.getParcelable(USER_MODEL)
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.profileData.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is ProfileUiState.Loading -> progressBar.visible()
-                is ProfileUiState.Success -> {
-                    progressBar.gone()
-                    initUserInfo(it.user)
+        if (userModel == null) {
+            viewModel.profileData.observe(viewLifecycleOwner, Observer {
+                when (it) {
+                    is ProfileUiState.Loading -> progressBar.visible()
+                    is ProfileUiState.Success -> {
+                        progressBar.gone()
+                        initUserInfo(it.user)
+                    }
+                    is ProfileUiState.Error -> progressBar.gone()
                 }
-                is ProfileUiState.Error -> progressBar.gone()
-            }
-        })
+            })
 
-        initExitButton()
-        viewModel.loadModel()
+            initExitButton()
+            viewModel.loadModel()
+        } else {
+            initUserInfo(userModel ?: throw Throwable("Model is empty"))
+
+            exitButton.text = "Message"
+            exitButton.setOnClickListener {
+                navigation.openChatFragment(
+                    R.id.profileContainer,
+                    activity,
+                    userModel ?: throw Throwable("Model is empty")
+                )
+            }
+        }
     }
 
     private fun initExitButton() {
@@ -62,6 +91,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     companion object {
-        fun newInstance() = ProfileFragment()
+        fun newInstance(user: User?) = ProfileFragment()
+            .apply {
+                arguments = Bundle().apply {
+                    putParcelable(USER_MODEL, user)
+                }
+            }
     }
 }

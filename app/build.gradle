@@ -61,4 +61,5 @@ dependencies {
     implementation project(':chat')
     implementation project(':extensions')
     implementation project(':comments')
+    implementation project(':users')
 }

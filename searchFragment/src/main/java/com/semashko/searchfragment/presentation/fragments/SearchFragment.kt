@@ -80,7 +80,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.addItemDecoration(
             BaseItemDecoration(
-                resources.getDimension(R.dimen.small_padding).toInt(),
+                resources.getDimension(R.dimen.default_padding).toInt(),
                 resources.getDimension(R.dimen.small_padding).toInt()
             )
         )

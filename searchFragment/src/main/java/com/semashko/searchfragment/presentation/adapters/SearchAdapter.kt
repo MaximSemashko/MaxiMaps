@@ -45,13 +45,13 @@ class SearchAdapter(
         override fun bind(item: Any) {
             if (item is SearchItem) {
                 Glide.with(context)
-                    .load("https://picsum.photos/seed/picsum/300/300")
+                    .load(item.imagesUrls?.get(0))
                     .into(itemView.searchImageView)
 
                 itemView.apply {
                     itemView.searchNameView.text = item.name
-//                    itemView.searchTypeView.text = item.description
-//                    itemView.searchExtraView.text = item.duration.toString()
+                    itemView.searchTypeView.text = item.type
+                    itemView.searchExtraView.text = item.description
 
                     setOnClickListener {
                         navigation.openItemDetailsPageFragment(

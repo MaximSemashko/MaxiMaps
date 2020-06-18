@@ -15,6 +15,7 @@ import com.semashko.maximaps.R
 import com.semashko.maximaps.presentation.chatroom.ChatFragment
 import com.semashko.profile.presentation.fragments.ProfileFragment
 import com.semashko.provider.preferences.IUserInfoPreferences
+import com.semashko.users.presentation.fragments.UsersFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 
@@ -45,8 +46,8 @@ class MainActivity : AppCompatActivity() {
             listOf(
                 HomeFragment(),
                 BookmarksFragment(),
-                ChatFragment(),
-                ProfileFragment.newInstance()
+                UsersFragment.newInstance(),
+                ProfileFragment.newInstance(null)
             )
 
         val screenSlidePagerAdapter = ScreenSlidePagerAdapter(
@@ -74,6 +75,7 @@ class MainActivity : AppCompatActivity() {
         fun startActivity(context: Context) {
             with(context) {
                 val intent = Intent(this, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
         }

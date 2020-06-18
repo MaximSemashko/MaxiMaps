@@ -13,11 +13,23 @@ import com.semashko.maximaps.presentation.chatroom.adapter.AdapterMessage
 import kotlinx.android.synthetic.main.fragment_chat_room.*
 import org.koin.android.ext.android.inject
 
+private const val USER_MODEL = "USER_MODEL"
+
 class ChatFragment : Fragment(R.layout.fragment_chat_room), ChatRoomView {
 
     private lateinit var adapterMessage: AdapterMessage
     private val chatRoomPresenter by inject<ChatRoomPresenter>()
     private var listChat: MutableList<Chat> = ArrayList()
+
+    private var user: com.semashko.provider.models.User? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            user = it.getParcelable(USER_MODEL)
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -72,5 +84,14 @@ class ChatFragment : Fragment(R.layout.fragment_chat_room), ChatRoomView {
     override fun onDestroy() {
         super.onDestroy()
         chatRoomPresenter.detachView()
+    }
+
+    companion object {
+        fun newInstance(user: com.semashko.provider.models.User?) = ChatFragment()
+            .apply {
+                arguments = Bundle().apply {
+                    putParcelable(USER_MODEL, user)
+                }
+            }
     }
 }

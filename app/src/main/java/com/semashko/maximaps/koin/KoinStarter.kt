@@ -11,6 +11,7 @@ import com.semashko.maximaps.module.chatModule
 import com.semashko.profile.koin.profileModule
 import com.semashko.searchfragment.koin.searchModule
 import com.semashko.seealldetailspage.koin.seeAllModule
+import com.semashko.users.koin.usersModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.KoinContextHandler.getOrNull
 import org.koin.core.context.startKoin
@@ -27,7 +28,8 @@ val koinModules = listOf(
     searchModule,
     dialogsModule,
     chatModule,
-    commentsModule
+    commentsModule,
+    usersModule
 )
 
 fun Application.initKoin() {

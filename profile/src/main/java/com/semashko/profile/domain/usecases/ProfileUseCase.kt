@@ -1,7 +1,7 @@
 package com.semashko.profile.domain.usecases
 
 import com.semashko.extensions.utils.Result
-import com.semashko.profile.data.entities.User
+import com.semashko.provider.models.User
 import com.semashko.profile.domain.repositories.IProfileRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
