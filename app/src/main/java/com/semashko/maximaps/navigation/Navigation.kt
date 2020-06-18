@@ -2,6 +2,8 @@ package com.semashko.maximaps.navigation
 
 import android.content.Context
 import androidx.fragment.app.FragmentActivity
+import com.semashko.comments.presentation.fragments.AddCommentFragment
+import com.semashko.comments.presentation.fragments.CommentsFragment
 import com.semashko.homepage.R
 import com.semashko.itemdetailspage.presentation.fragments.ItemDetailsPageFragment
 import com.semashko.login.presentation.LoginActivity
@@ -37,5 +39,37 @@ class Navigation(private val context: Context) : INavigation {
             )
             ?.addToBackStack(null)
             ?.commit()
+    }
+
+    override fun openAddCommentFragment(
+        containerViewId: Int?,
+        activity: FragmentActivity?,
+        itemDetails: ItemDetails
+    ) {
+        containerViewId?.let {
+            activity
+                ?.supportFragmentManager
+                ?.beginTransaction()
+                ?.replace(
+                    it,
+                    AddCommentFragment.newInstance(itemDetails)
+                )
+                ?.addToBackStack(null)
+                ?.commit()
+        }
+    }
+
+    override fun openCommentsFragment(containerViewId: Int?, activity: FragmentActivity?, itemDetails: ItemDetails?) {
+        containerViewId?.let {
+            activity
+                ?.supportFragmentManager
+                ?.beginTransaction()
+                ?.replace(
+                    it,
+                    CommentsFragment.newInstance(itemDetails)
+                )
+                ?.addToBackStack(null)
+                ?.commit()
+        }
     }
 }

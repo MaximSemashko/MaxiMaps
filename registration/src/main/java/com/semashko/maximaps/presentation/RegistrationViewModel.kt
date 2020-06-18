@@ -7,17 +7,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.semashko.extensions.constants.EMPTY
 import com.semashko.extensions.utils.Result
 import com.semashko.maximaps.data.entities.User
 import com.semashko.maximaps.domain.usecases.ISignUpUseCase
+import com.semashko.provider.preferences.IUserInfoPreferences
 import kotlinx.coroutines.*
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import kotlin.coroutines.CoroutineContext
 
 
 class RegistrationViewModel(
     private val signUpUseCase: ISignUpUseCase
-) : ViewModel() {
+) : ViewModel(), KoinComponent {
 
+    private val userInfoPreferences: IUserInfoPreferences by inject()
     private val coroutineScopeJob = Job()
     private val registrationUiMutableState = MutableLiveData<RegistrationUiState>()
 
@@ -35,6 +40,7 @@ class RegistrationViewModel(
         CoroutineScope(coroutineContext).launch {
             when (val result = signUpUseCase.signUp(user)) {
                 is Result.Success -> {
+                    userInfoPreferences.name = user.name ?: EMPTY
                     signUpUseCase.addUserToRealtimeDatabase(
                         user = user.copy(
                             localId = result.value.localId,

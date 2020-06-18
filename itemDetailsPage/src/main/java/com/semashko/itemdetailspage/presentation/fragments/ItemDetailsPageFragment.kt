@@ -20,15 +20,19 @@ import com.semashko.provider.BaseItemDecoration
 import com.semashko.provider.Point
 import com.semashko.provider.models.detailsPage.ItemDetails
 import com.semashko.provider.models.home.Attractions
+import com.semashko.provider.navigation.INavigation
 import kotlinx.android.synthetic.main.fragment_item_details_page.*
 import org.koin.androidx.scope.lifecycleScope
 import org.koin.androidx.viewmodel.scope.viewModel
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
 private const val ITEM_DETAILS_MODEL = "ITEM_DETAILS_MODEL"
 
-class ItemDetailsPageFragment : Fragment(R.layout.fragment_item_details_page) {
+class ItemDetailsPageFragment : Fragment(R.layout.fragment_item_details_page), KoinComponent {
 
     private val viewModel: RecommendationsViewModel by lifecycleScope.viewModel(this)
+    private val navigation: INavigation by inject()
 
     private val attractionsList = ArrayList<Attractions>()
 
@@ -53,6 +57,7 @@ class ItemDetailsPageFragment : Fragment(R.layout.fragment_item_details_page) {
         initRecommendedRecyclerView()
         initShowOnMapButton()
         initAddToBookmarkImageView()
+        initComments()
 
         viewModel.recommendationsData.observe(viewLifecycleOwner, Observer {
             when (it) {
@@ -77,6 +82,12 @@ class ItemDetailsPageFragment : Fragment(R.layout.fragment_item_details_page) {
         })
 
         viewModel.loadRecommendations()
+    }
+
+    private fun initComments() {
+        addCommentButton.setOnClickListener {
+            navigation.openCommentsFragment(R.id.container, activity, itemDetails)
+        }
     }
 
     private fun initAddToBookmarkImageView() {

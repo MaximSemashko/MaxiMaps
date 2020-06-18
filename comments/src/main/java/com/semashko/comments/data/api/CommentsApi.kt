@@ -16,7 +16,7 @@ class CommentsApi {
 
     fun getComments(): List<Reviews>? {
         val request = Request.Builder()
-            .url("https://maximaps.firebaseio.com/${localId}/Reviews.json")
+            .url("https://maximaps.firebaseio.com/TouristsRoutes/-M9ophUmsNKLBGDaU01L/reviews.json")
             .get()
             .build()
 
@@ -32,9 +32,9 @@ class CommentsApi {
             val iterator = objects.keys()
 
             while (iterator.hasNext()) {
-                val bookmark = objects.getJSONObject(iterator.next())
+                val comment = objects.getJSONObject(iterator.next())
 
-                comments.add(gson.fromJson(bookmark.toString(), Reviews::class.java))
+                comments.add(gson.fromJson(comment.toString(), Reviews::class.java))
             }
 
             comments

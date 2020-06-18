@@ -24,6 +24,7 @@ class ExitDialogFragment : DialogFragment(), KoinComponent {
             .setPositiveButton("Yes") { _, _ ->
                 userInfoPreferences.localId = EMPTY
                 userInfoPreferences.token = EMPTY
+                userInfoPreferences.name = EMPTY
                 navigation.openLoginActivity()
             }
             .setNegativeButton(

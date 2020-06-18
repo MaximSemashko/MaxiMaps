@@ -10,8 +10,14 @@ data class Reviews(
     val text: String? = null,
 
     @SerializedName("timestamp")
-    val timestamp: String? = null,
+    val timestamp: Long? = null,
 
     @SerializedName("userName")
-    val userName: String? = null
+    val userName: String? = null,
+
+    @SerializedName("stars")
+    val stars: Float? = null,
+
+    @SerializedName("userImageUrl")
+    val userImageUrl: String? = null
 ) : Parcelable

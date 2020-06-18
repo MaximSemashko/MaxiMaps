@@ -11,5 +11,21 @@ interface INavigation {
 
     fun openLoginActivity()
 
-    fun openItemDetailsPageFragment(containerViewId: Int? = null, activity: FragmentActivity?, itemDetails: ItemDetails)
+    fun openItemDetailsPageFragment(
+        containerViewId: Int? = null,
+        activity: FragmentActivity?,
+        itemDetails: ItemDetails
+    )
+
+    fun openAddCommentFragment(
+        containerViewId: Int? = null,
+        activity: FragmentActivity?,
+        itemDetails: ItemDetails
+    )
+
+    fun openCommentsFragment(
+        containerViewId: Int?,
+        activity: FragmentActivity?,
+        itemDetails: ItemDetails?
+    )
 }

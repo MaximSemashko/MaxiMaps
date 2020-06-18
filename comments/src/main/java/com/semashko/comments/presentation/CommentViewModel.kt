@@ -1,39 +1,38 @@
 package com.semashko.comments.presentation
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.semashko.comments.data.entities.Reviews
 import com.semashko.comments.domain.usecases.ICommentsUseCase
 import com.semashko.extensions.utils.Result
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class CommentsViewModel(
+class CommentViewModel(
     private val commentsUseCase: ICommentsUseCase
 ) : ViewModel() {
 
     private val coroutineScopeJob = Job()
-    private val commentsUiMutableState = MutableLiveData<CommentsUiState>()
+    private val commentUiMutableState = MutableLiveData<CommentUiState>()
 
-    val commentsData: LiveData<CommentsUiState>
-        get() = commentsUiMutableState
+    val commentData: LiveData<CommentUiState>
+        get() = commentUiMutableState
 
     private val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + coroutineScopeJob
 
-    fun loadComments() {
+    fun loadComment(review: Reviews) {
         coroutineContext.cancelChildren()
 
-        commentsUiMutableState.value = CommentsUiState.Loading
+        commentUiMutableState.value = CommentUiState.Loading
 
         CoroutineScope(coroutineContext).launch {
-            when (val result = commentsUseCase.getComments()) {
+            when (val result = commentsUseCase.addComment(reviews = review)) {
                 is Result.Success -> {
-                    commentsUiMutableState.value = CommentsUiState.Success(result.value)
-                    Log.i("TAG", result.value.toString())
+                    commentUiMutableState.value = CommentUiState.Success(result.value)
                 }
-                is Result.Error -> CommentsUiState.Error(result.exception)
+                is Result.Error -> CommentUiState.Error(result.exception)
             }
         }
     }
