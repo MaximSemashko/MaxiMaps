@@ -9,3 +9,12 @@ sealed class CommentsUiState {
 
     data class Error(val throwable: Throwable) : CommentsUiState()
 }
+
+sealed class CommentUiState {
+    object Loading : CommentUiState()
+
+    data class Success(val itemWasAdded: Boolean) : CommentUiState()
+
+    data class Error(val throwable: Throwable) : CommentUiState()
+
+}

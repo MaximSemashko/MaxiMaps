@@ -1,6 +1,6 @@
 package com.semashko.profile.presentation
 
-import com.semashko.profile.data.entities.User
+import com.semashko.provider.models.User
 
 sealed class ProfileUiState {
     object Loading : ProfileUiState()

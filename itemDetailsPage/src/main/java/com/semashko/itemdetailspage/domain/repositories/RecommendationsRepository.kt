@@ -2,6 +2,7 @@ package com.semashko.itemdetailspage.domain.repositories
 
 import com.semashko.extensions.utils.Result
 import com.semashko.itemdetailspage.data.services.IRecommendationsService
+import com.semashko.provider.models.detailsPage.ItemDetails
 import com.semashko.provider.models.home.Attractions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -14,6 +15,16 @@ class RecommendationsRepository(
         return withContext(Dispatchers.IO) {
             runCatching {
                 Result.Success(recommendationsService.getAttractions() ?: emptyList())
+            }.getOrElse {
+                Result.Error(it)
+            }
+        }
+    }
+
+    override suspend fun addItemToBookmarks(itemDetails: ItemDetails): Result<Boolean> {
+        return withContext(Dispatchers.IO) {
+            kotlin.runCatching {
+                Result.Success(recommendationsService.addItemToBookmarks(itemDetails))
             }.getOrElse {
                 Result.Error(it)
             }

@@ -19,5 +19,11 @@ data class User(
     val address: String? = null,
 
     @SerializedName("birthDay")
-    val birthDay: String? = null
+    val birthDay: String? = null,
+
+    @SerializedName("localId")
+    val localId: String? = null,
+
+    @SerializedName("imageUrl")
+    val imageUrl: String? = null
 )

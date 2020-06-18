@@ -7,10 +7,11 @@ import com.semashko.dialogs.koin.dialogsModule
 import com.semashko.homepage.koin.homeModule
 import com.semashko.itemdetailspage.koin.recommendationsModule
 import com.semashko.login.koin.loginModule
-import com.semashko.maximaps.module.chatModule
+import com.semashko.maximaps.pankchat.koin.messageModule
 import com.semashko.profile.koin.profileModule
 import com.semashko.searchfragment.koin.searchModule
 import com.semashko.seealldetailspage.koin.seeAllModule
+import com.semashko.users.koin.usersModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.KoinContextHandler.getOrNull
 import org.koin.core.context.startKoin
@@ -26,8 +27,9 @@ val koinModules = listOf(
     profileModule,
     searchModule,
     dialogsModule,
-    chatModule,
-    commentsModule
+    messageModule,
+    commentsModule,
+    usersModule
 )
 
 fun Application.initKoin() {

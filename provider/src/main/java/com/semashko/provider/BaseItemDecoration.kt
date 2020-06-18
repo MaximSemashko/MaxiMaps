@@ -17,7 +17,7 @@ class BaseItemDecoration(
             left = horizontalMargin ?: 0
             right = horizontalMargin ?: 0
             top = verticalMargin ?: 0
-            bottom = verticalMargin ?: 0
+//            bottom = verticalMargin ?: 0
         }
     }
 }

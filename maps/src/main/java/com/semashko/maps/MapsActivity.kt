@@ -38,19 +38,14 @@ private val GRODNO_POSITION = Point(53.6688, 23.8223)
 
 class MapsActivity : AppCompatActivity(), DrivingSession.DrivingRouteListener {
 
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
-
     private lateinit var drivingRouter: DrivingRouter
     private lateinit var drivingSession: DrivingSession
     private lateinit var mapObjects: MapObjectCollection
 
-    private var points: ArrayList<com.semashko.provider.Point>? = null
+    lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    private val locationCallback: LocationCallback = object : LocationCallback() {
-        override fun onLocationResult(locationResult: LocationResult) {
-            val lastLocation: Location = locationResult.getLastLocation()
-        }
-    }
+    private var points: ArrayList<com.semashko.provider.Point>? = null
+    private var currentPosition: com.semashko.provider.Point? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         MapKitFactory.setApiKey(BuildConfig.YANDEX_MAP_KEY)
@@ -58,14 +53,37 @@ class MapsActivity : AppCompatActivity(), DrivingSession.DrivingRouteListener {
         DirectionsFactory.initialize(this)
 
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_maps)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
         points = intent.getParcelableArrayListExtra(POINTS_KEY)
 
         getLastLocation()
-        initMap()
+    }
+
+    private fun createRouteList(
+        currentPosition: com.semashko.provider.Point?,
+        points: ArrayList<com.semashko.provider.Point>?
+    ) = ArrayList<Point>().apply {
+        currentPosition?.let {
+            it.latitude?.let { it1 ->
+                it.longitude?.let { it2 ->
+                    Point(
+                        it1,
+                        it2
+                    )
+                }
+            }?.let { it2 ->
+                add(
+                    it2
+                )
+            }
+        }
+        points?.forEach {
+            it.latitude?.let { it1 -> it.longitude?.let { it2 -> Point(it1, it2) } }
+                ?.let { it2 -> add(it2) }
+        }
     }
 
     override fun onStart() {
@@ -78,6 +96,11 @@ class MapsActivity : AppCompatActivity(), DrivingSession.DrivingRouteListener {
         mapView.onStop()
         MapKitFactory.getInstance().onStop()
         super.onStop()
+    }
+
+    override fun onDestroy() {
+        mapView.map.mapObjects.clear()
+        super.onDestroy()
     }
 
     override fun onDrivingRoutesError(error: Error) {
@@ -97,7 +120,7 @@ class MapsActivity : AppCompatActivity(), DrivingSession.DrivingRouteListener {
         }
     }
 
-    private fun initMap() {
+    private fun initMap(points: ArrayList<Point>) {
         mapView.map.move(
             CameraPosition(GRODNO_POSITION, 14.0f, 0.0f, 0.0f),
             Animation(Animation.Type.SMOOTH, 0f),
@@ -107,18 +130,62 @@ class MapsActivity : AppCompatActivity(), DrivingSession.DrivingRouteListener {
         drivingRouter = DirectionsFactory.getInstance().createDrivingRouter()
         mapObjects = mapView.map.mapObjects.addCollection()
 
-        submitRequest()
+        submitRequest(points)
+    }
+
+    private fun submitRequest(points: ArrayList<Point>) {
+        val options = DrivingOptions()
+        val requestPoints = ArrayList<RequestPoint>()
+
+        points.forEach {
+            Log.i("WTF", it.toString())
+            requestPoints.add(
+                RequestPoint(
+                    it,
+                    RequestPointType.WAYPOINT,
+                    null
+                )
+            )
+
+        }
+
+        drivingSession = drivingRouter.requestRoutes(requestPoints, options, this)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == PERMISSION_ID) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                getLastLocation()
+            }
+        }
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        val locationManager: LocationManager =
+            getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
     }
 
     private fun checkPermissions(): Boolean {
-        return ActivityCompat.checkSelfPermission(
-            this,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            return true
+        }
+        return false
     }
 
     private fun requestPermissions() {
@@ -132,39 +199,20 @@ class MapsActivity : AppCompatActivity(), DrivingSession.DrivingRouteListener {
         )
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PERMISSION_ID) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Granted. Start getting the location information
-            }
-        }
-    }
-
-    private fun isLocationEnabled(): Boolean {
-        val locationManager: LocationManager =
-            getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        )
-    }
-
     @SuppressLint("MissingPermission")
     private fun getLastLocation() {
         if (checkPermissions()) {
             if (isLocationEnabled()) {
-                fusedLocationClient.lastLocation.addOnCompleteListener { task ->
+
+                fusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
                     val location: Location? = task.result
+
                     if (location == null) {
                         requestNewLocationData()
                     } else {
-                        Log.i("TAG", location.latitude.toString() + "")
-                        Log.i("TAG", location.longitude.toString() + "")
-                        //TODO
+                        currentPosition =
+                            com.semashko.provider.Point(location.latitude, location.longitude)
+                        initMap(createRouteList(currentPosition, points))
                     }
                 }
             } else {
@@ -179,32 +227,30 @@ class MapsActivity : AppCompatActivity(), DrivingSession.DrivingRouteListener {
 
     @SuppressLint("MissingPermission")
     private fun requestNewLocationData() {
-        with(LocationRequest()) {
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-            interval = 0
-            fastestInterval = 0
-            numUpdates = 1
+        val locationRequest = LocationRequest()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.interval = 0
+        locationRequest.fastestInterval = 0
+        locationRequest.numUpdates = 1
 
-            fusedLocationClient.requestLocationUpdates(
-                this,
-                locationCallback,
-                Looper.myLooper()
-            )
-        }
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        fusedLocationClient.requestLocationUpdates(
+            locationRequest,
+            locationCallback,
+            Looper.myLooper()
+        )
     }
 
-    private fun submitRequest() {
-        val options = DrivingOptions()
-        val requestPoints = java.util.ArrayList<RequestPoint>()
+    private val locationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            val lastLocation: Location = locationResult.lastLocation
 
-        requestPoints.add(
-            RequestPoint(
-                GRODNO_POSITION,
-                RequestPointType.WAYPOINT,
-                null
-            )
-        )
-        drivingSession = drivingRouter.requestRoutes(requestPoints, options, this)
+            if (currentPosition == null) {
+                currentPosition =
+                    com.semashko.provider.Point(lastLocation.latitude, lastLocation.longitude)
+            }
+        }
     }
 
     companion object {
@@ -213,7 +259,10 @@ class MapsActivity : AppCompatActivity(), DrivingSession.DrivingRouteListener {
             points: ArrayList<com.semashko.provider.Point>? = null
         ) {
             val intent = Intent(context, MapsActivity::class.java).apply {
-                putParcelableArrayListExtra(POINTS_KEY, points)
+                putParcelableArrayListExtra(
+                    POINTS_KEY,
+                    points
+                )
             }
 
             context.startActivity(intent)

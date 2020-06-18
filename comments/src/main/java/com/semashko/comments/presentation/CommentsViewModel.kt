@@ -14,10 +14,10 @@ class CommentsViewModel(
 ) : ViewModel() {
 
     private val coroutineScopeJob = Job()
-    private val bookmarksUiMutableState = MutableLiveData<CommentsUiState>()
+    private val commentsUiMutableState = MutableLiveData<CommentsUiState>()
 
     val commentsData: LiveData<CommentsUiState>
-        get() = bookmarksUiMutableState
+        get() = commentsUiMutableState
 
     private val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + coroutineScopeJob
@@ -25,12 +25,12 @@ class CommentsViewModel(
     fun loadComments() {
         coroutineContext.cancelChildren()
 
-        bookmarksUiMutableState.value = CommentsUiState.Loading
+        commentsUiMutableState.value = CommentsUiState.Loading
 
         CoroutineScope(coroutineContext).launch {
             when (val result = commentsUseCase.getComments()) {
                 is Result.Success -> {
-                    bookmarksUiMutableState.value = CommentsUiState.Success(result.value)
+                    commentsUiMutableState.value = CommentsUiState.Success(result.value)
                     Log.i("TAG", result.value.toString())
                 }
                 is Result.Error -> CommentsUiState.Error(result.exception)
