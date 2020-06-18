@@ -12,7 +12,6 @@ import com.semashko.bookmarks.presentation.fragments.BookmarksFragment
 import com.semashko.homepage.presentation.fragments.HomeFragment
 import com.semashko.login.presentation.LoginActivity
 import com.semashko.maximaps.R
-import com.semashko.maximaps.presentation.chatroom.ChatFragment
 import com.semashko.profile.presentation.fragments.ProfileFragment
 import com.semashko.provider.preferences.IUserInfoPreferences
 import com.semashko.users.presentation.fragments.UsersFragment

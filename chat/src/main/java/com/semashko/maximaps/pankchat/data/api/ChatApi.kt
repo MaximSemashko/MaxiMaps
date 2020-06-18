@@ -1,8 +1,8 @@
-package com.semashko.itemdetailspage.data.api
+package com.semashko.maximaps.pankchat.data.api
 
 import com.google.gson.Gson
+import com.semashko.maximaps.pankchat.data.entities.Message
 import com.semashko.provider.models.detailsPage.ItemDetails
-import com.semashko.provider.models.home.Attractions
 import com.semashko.provider.preferences.IUserInfoPreferences
 import com.squareup.okhttp.MediaType
 import com.squareup.okhttp.OkHttpClient
@@ -13,15 +13,15 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.IOException
 
-class RecommendationsDataApi : KoinComponent {
+class ChatApi : KoinComponent {
     private val userInfoPreferences: IUserInfoPreferences by inject()
 
     private val client = OkHttpClient()
     private val gson = Gson()
 
-    fun getAttractions(): List<Attractions>? {
+    fun getMessages(): List<Message>? {
         val request = Request.Builder()
-            .url("https://maximaps.firebaseio.com/Attractions.json")
+            .url("https://maximaps.firebaseio.com/${userInfoPreferences.localId}/Chats.json")
             .get()
             .build()
 
@@ -31,28 +31,28 @@ class RecommendationsDataApi : KoinComponent {
         return if (responseString == "null") {
             emptyList()
         } else {
-            val attractions = mutableListOf<Attractions>()
+            val bookmarks = mutableListOf<Message>()
 
             val objects = JSONObject(responseString)
             val iterator = objects.keys()
 
             while (iterator.hasNext()) {
-                val route = objects.getJSONObject(iterator.next())
+                val bookmark = objects.getJSONObject(iterator.next())
 
-                attractions.add(gson.fromJson(route.toString(), Attractions::class.java))
+                bookmarks.add(gson.fromJson(bookmark.toString(), Message::class.java))
             }
 
-            attractions
+            bookmarks
         }
     }
 
     @Throws(IOException::class)
-    fun addItemToBookmarks(itemDetails: ItemDetails): Boolean {
-        val jsonString = gson.toJson(itemDetails).toString()
+    fun sendMessage(message: Message, localId: String?): Boolean {
+        val jsonString = gson.toJson(message).toString()
         val body =
             RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonString)
         val request = Request.Builder()
-            .url("https://maximaps.firebaseio.com/${userInfoPreferences.localId}/Bookmarks.json")
+            .url("https://maximaps.firebaseio.com/${localId}/Chats.json")
             .post(body)
             .build()
 

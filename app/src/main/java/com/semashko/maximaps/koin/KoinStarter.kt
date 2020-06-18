@@ -7,7 +7,7 @@ import com.semashko.dialogs.koin.dialogsModule
 import com.semashko.homepage.koin.homeModule
 import com.semashko.itemdetailspage.koin.recommendationsModule
 import com.semashko.login.koin.loginModule
-import com.semashko.maximaps.module.chatModule
+import com.semashko.maximaps.pankchat.koin.messageModule
 import com.semashko.profile.koin.profileModule
 import com.semashko.searchfragment.koin.searchModule
 import com.semashko.seealldetailspage.koin.seeAllModule
@@ -27,7 +27,7 @@ val koinModules = listOf(
     profileModule,
     searchModule,
     dialogsModule,
-    chatModule,
+    messageModule,
     commentsModule,
     usersModule
 )

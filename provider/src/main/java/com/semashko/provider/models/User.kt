@@ -21,6 +21,9 @@ data class User(
     @SerializedName("birthDay")
     val birthDay: String? = null,
 
+    @SerializedName("localId")
+    val localId: String? = null,
+
     @SerializedName("imageUrl")
     val imageUrl: String? = null
 ) : Parcelable

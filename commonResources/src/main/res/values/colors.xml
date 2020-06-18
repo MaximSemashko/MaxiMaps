@@ -6,6 +6,7 @@
     <color name="softPeach">#F9F5F4</color>
     <color name="softPeachOpacity80">#CCF9F5F4</color>
     <color name="orange">#FC6633</color>
+    <color name="orangeOpacity5">#0DFC6633</color>
     <color name="orangeOpacity80">#CCFC6633</color>
     <color name="orangeOpacity50">#80FC6633</color>
     <color name="white">#FFFFFF</color>

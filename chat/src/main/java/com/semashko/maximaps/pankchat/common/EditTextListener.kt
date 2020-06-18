@@ -1,11 +1,10 @@
-package com.semashko.maximaps.common
+package com.semashko.maximaps.pankchat.common
 
 import android.text.Editable
 import android.text.TextWatcher
 import android.transition.TransitionManager
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 
 class EditTextListener(private val btn: ImageButton) : TextWatcher {

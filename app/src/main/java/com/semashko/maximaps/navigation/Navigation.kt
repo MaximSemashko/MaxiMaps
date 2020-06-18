@@ -9,7 +9,7 @@ import com.semashko.itemdetailspage.presentation.fragments.ItemDetailsPageFragme
 import com.semashko.login.presentation.LoginActivity
 import com.semashko.maximaps.presentation.MainActivity
 import com.semashko.maximaps.presentation.RegistrationActivity
-import com.semashko.maximaps.presentation.chatroom.ChatFragment
+import com.semashko.maximaps.pankchat.presentation.fragments.ChatFragment
 import com.semashko.profile.presentation.fragments.ProfileFragment
 import com.semashko.provider.models.detailsPage.ItemDetails
 import com.semashko.provider.navigation.INavigation
