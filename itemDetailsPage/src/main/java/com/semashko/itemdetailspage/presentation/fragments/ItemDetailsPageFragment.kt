@@ -19,7 +19,6 @@ import com.semashko.maps.MapsActivity
 import com.semashko.provider.BaseItemDecoration
 import com.semashko.provider.Point
 import com.semashko.provider.models.detailsPage.ItemDetails
-import com.semashko.provider.models.home.Attractions
 import com.semashko.provider.navigation.INavigation
 import kotlinx.android.synthetic.main.fragment_item_details_page.*
 import org.koin.androidx.scope.lifecycleScope
@@ -33,8 +32,6 @@ class ItemDetailsPageFragment : Fragment(R.layout.fragment_item_details_page), K
 
     private val viewModel: RecommendationsViewModel by lifecycleScope.viewModel(this)
     private val navigation: INavigation by inject()
-
-    private val attractionsList = ArrayList<Attractions>()
 
     private var itemDetails: ItemDetails? = null
 
@@ -54,7 +51,7 @@ class ItemDetailsPageFragment : Fragment(R.layout.fragment_item_details_page), K
 
         initToolbar()
         initItemDetails(itemDetails)
-        initRecommendedRecyclerView()
+        initRecommendationsRecyclerView()
         initShowOnMapButton()
         initAddToBookmarkImageView()
         initComments()
@@ -137,38 +134,6 @@ class ItemDetailsPageFragment : Fragment(R.layout.fragment_item_details_page), K
         }
     }
 
-    private fun initRecommendedRecyclerView() {
-        for (i in 1..1000) {
-            attractionsList.add(
-                Attractions(
-                    name = "Name + $i",
-                    imagesUrls = listOf(
-                        "https://picsum.photos/seed/picsum/300/300",
-                        "https://picsum.photos/seed/picsum/300/300",
-                        "https://picsum.photos/seed/picsum/300/300"
-                    )
-                )
-            )
-        }
-
-        recommendedItemsAdapter =
-            RecommendedItemsAdapter(
-                requireContext(),
-                attractionsList
-            )
-
-        with(recommendedRecyclerView) {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = recommendedItemsAdapter
-            addItemDecoration(
-                BaseItemDecoration(
-                    horizontalMargin = resources.getDimension(R.dimen.small_padding).toInt(),
-                    verticalMargin = resources.getDimension(R.dimen.small_padding).toInt()
-                )
-            )
-        }
-    }
-
     private fun initPhotosRecyclerView(imagesUrls: List<String>?) {
         photosAdapter =
             PhotosAdapter(
@@ -182,6 +147,21 @@ class ItemDetailsPageFragment : Fragment(R.layout.fragment_item_details_page), K
             addItemDecoration(
                 BaseItemDecoration(
                     horizontalMargin = resources.getDimension(R.dimen.small_padding).toInt()
+                )
+            )
+        }
+    }
+
+    private fun initRecommendationsRecyclerView() {
+        recommendedItemsAdapter = RecommendedItemsAdapter(activity)
+
+        with(recommendedRecyclerView) {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = recommendedItemsAdapter
+            addItemDecoration(
+                BaseItemDecoration(
+                    horizontalMargin = resources.getDimension(R.dimen.small_padding).toInt(),
+                    verticalMargin = resources.getDimension(R.dimen.small_padding).toInt()
                 )
             )
         }
