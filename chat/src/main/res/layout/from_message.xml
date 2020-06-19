@@ -30,6 +30,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             tools:text="Username" />
+
     </LinearLayout>
 
     <TextView

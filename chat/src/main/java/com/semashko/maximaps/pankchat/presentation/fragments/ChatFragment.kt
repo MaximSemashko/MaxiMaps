@@ -45,7 +45,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat_room), KoinComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainToolbar.title = user?.name ?: "Chat"
+        mainToolbar.title = user?.name ?: getString(R.string.chat)
         messageText.addTextChangedListener(EditTextListener(sendButton))
 
         initRecyclerView()

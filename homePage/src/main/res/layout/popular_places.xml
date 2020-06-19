@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Attractions"
+        android:text="@string/attractions"
         android:textColor="@color/black" />
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_marginEnd="16dp"
         android:clickable="true"
         android:focusable="true"
-        android:text="See all"
+        android:text="@string/see_all"
         android:textColor="@color/black" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -45,7 +45,7 @@
         android:layout_below="@+id/attractionsRecyclerView"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Tourists routes"
+        android:text="@string/tourists_routes"
         android:textColor="@color/black" />
 
     <TextView
@@ -57,7 +57,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:clickable="true"
-        android:text="See all"
+        android:focusable="true"
+        android:text="@string/see_all"
         android:textColor="@color/black" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -77,7 +78,7 @@
         android:layout_below="@id/touristsRoutesRecyclerView"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Mansions"
+        android:text="@string/mansions"
         android:textColor="@color/black" />
 
     <TextView
@@ -90,7 +91,7 @@
         android:layout_marginEnd="16dp"
         android:clickable="true"
         android:focusable="true"
-        android:text="See all"
+        android:text="@string/see_all"
         android:textColor="@color/black" />
 
     <androidx.recyclerview.widget.RecyclerView

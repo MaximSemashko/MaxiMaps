@@ -37,7 +37,7 @@
             app:bt_colorInactive="@color/grey"
             app:bt_icon="@drawable/ic_home"
             app:bt_shape="@drawable/transition_background_drawable"
-            app:bt_title="Home" />
+            app:bt_title="@string/home" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/bookmarksPage"
@@ -48,7 +48,7 @@
             app:bt_colorInactive="@color/grey"
             app:bt_icon="@drawable/ic_saved"
             app:bt_shape="@drawable/transition_background_drawable"
-            app:bt_title="Saved" />
+            app:bt_title="@string/saved" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/chatPage"
@@ -59,7 +59,7 @@
             app:bt_colorInactive="@color/grey"
             app:bt_icon="@drawable/ic_chat"
             app:bt_shape="@drawable/transition_background_drawable"
-            app:bt_title="Chats" />
+            app:bt_title="@string/chats" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/profilePage"
@@ -70,7 +70,7 @@
             app:bt_colorInactive="@color/grey"
             app:bt_icon="@drawable/ic_person"
             app:bt_shape="@drawable/transition_background_drawable"
-            app:bt_title="Profile" />
+            app:bt_title="@string/profile" />
 
     </com.gauravk.bubblenavigation.BubbleNavigationLinearView>
 

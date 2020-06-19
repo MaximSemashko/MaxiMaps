@@ -216,7 +216,7 @@ class MapsActivity : AppCompatActivity(), DrivingSession.DrivingRouteListener {
                     }
                 }
             } else {
-                Toast.makeText(this, "Turn on location", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.turn_on_location), Toast.LENGTH_LONG).show()
                 val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                 startActivity(intent)
             }

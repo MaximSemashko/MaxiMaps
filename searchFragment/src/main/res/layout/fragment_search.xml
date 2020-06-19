@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_search_orange"
             android:drawablePadding="16dp"
-            android:hint="Search your destination"
+            android:hint="@string/search_your_destination"
             android:textColor="@color/black"
             android:textColorHint="@color/orange"
             src:text="Zhilibers park" />

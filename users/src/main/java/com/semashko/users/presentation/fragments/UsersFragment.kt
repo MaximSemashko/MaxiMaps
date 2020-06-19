@@ -65,7 +65,7 @@ class UsersFragment : Fragment(R.layout.fragment_users), KoinComponent {
     }
 
     private fun initToolbar() {
-        toolbar.title = "Users"
+        toolbar.title = getString(R.string.users)
     }
 
     private fun initRecyclerView() {

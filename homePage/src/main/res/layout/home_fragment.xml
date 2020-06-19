@@ -40,7 +40,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:text="MaxiMaps"
+                        android:text="@string/app_name"
                         android:textColor="@color/white"
                         android:textSize="24sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +81,7 @@
                             android:layout_height="wrap_content"
                             android:drawableStart="@drawable/ic_search_orange"
                             android:drawablePadding="16dp"
-                            android:hint="Search your destination"
+                            android:hint="@string/search_your_destination"
                             android:textColor="@color/black"
                             android:textColorHint="@color/orange"
                             src:text="Zhilibers park" />

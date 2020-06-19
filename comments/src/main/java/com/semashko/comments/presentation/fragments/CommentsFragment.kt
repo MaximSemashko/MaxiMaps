@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.semashko.comments.R
-import com.semashko.comments.data.entities.Reviews
 import com.semashko.comments.presentation.CommentsUiState
 import com.semashko.comments.presentation.CommentsViewModel
 import com.semashko.comments.presentation.adapters.CommentsAdapter
@@ -25,7 +24,6 @@ class CommentsFragment : Fragment(R.layout.fragment_comments), KoinComponent {
 
     private val viewModel: CommentsViewModel by lifecycleScope.viewModel(this)
     private val navigation: INavigation by inject()
-    private val comments = ArrayList<Reviews>()
 
     private var itemDetails: ItemDetails? = null
 
@@ -49,6 +47,7 @@ class CommentsFragment : Fragment(R.layout.fragment_comments), KoinComponent {
                 }
                 is CommentsUiState.Success -> {
                     swipeRefreshLayout.isRefreshing = false
+                    commentsAdapter.setItems(it.reviews)
                 }
                 is CommentsUiState.Error -> {
                     swipeRefreshLayout.isRefreshing = false
@@ -56,19 +55,7 @@ class CommentsFragment : Fragment(R.layout.fragment_comments), KoinComponent {
             }
         })
 
-        for (i in 1..1000) {
-            comments.add(
-                Reviews(
-                    text = "text asd asd ghasftext asd asd ghasftext asd asd ghasftext asd asd ghasftext asd asd ghasftext asd asd ghasftext asd asd ghasftext asd asd ghasftext asd asd ghasf ",
-                    timestamp = 1592416733240,
-                    userName = "userName",
-                    stars = 3f,
-                    userImageUrl = "https://picsum.photos/seed/picsum/800/800"
-                )
-            )
-        }
-
-        initRecyclerView(comments)
+        initRecyclerView()
         initToolbar()
         initSwipeToRefreshLayout()
         initWriteCommentButton()
@@ -100,12 +87,11 @@ class CommentsFragment : Fragment(R.layout.fragment_comments), KoinComponent {
     }
 
     private fun initToolbar() {
-        toolbar.title = "Comments"
+        toolbar.title = getString(R.string.comments)
     }
 
-    private fun initRecyclerView(bookmarks: List<Reviews>) {
+    private fun initRecyclerView() {
         commentsAdapter = CommentsAdapter(activity)
-        commentsAdapter.setItems(bookmarks)
 
         commentsRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

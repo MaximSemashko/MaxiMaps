@@ -70,8 +70,8 @@ class ItemDetailsPageFragment : Fragment(R.layout.fragment_item_details_page), K
                 is ItemUiState.Success -> {
                     progressBar.gone()
                     addBookmarkImageView.background = resources.getDrawable(R.drawable.ic_bookmark)
-                    view.snack("Bookmark was added") {
-                        action("Close") {}
+                    view.snack(getString(R.string.bookmark_was_added)) {
+                        action(getString(R.string.close)) {}
                     }
                 }
                 is ItemUiState.Error -> progressBar.gone()
@@ -101,13 +101,13 @@ class ItemDetailsPageFragment : Fragment(R.layout.fragment_item_details_page), K
         if (!itemDetails?.type.isNullOrEmpty() && itemDetails?.duration != null) {
             addressTextView.text = itemDetails.type
             hoursTextView.text = itemDetails.duration.toString()
-            textView2.text = "Type: "
-            textView3.text = "Duration: "
+            textView2.text = getString(R.string.type)
+            textView3.text = getString(R.string.duration)
         } else {
             addressTextView.text = itemDetails?.address
             hoursTextView.text = itemDetails?.workingHours
-            textView2.text = "Address:"
-            textView3.text = "Hours: "
+            textView2.text = getString(R.string.address)
+            textView3.text = getString(R.string.hours)
         }
 
         initPhotosRecyclerView(itemDetails?.imagesUrls)
@@ -123,7 +123,8 @@ class ItemDetailsPageFragment : Fragment(R.layout.fragment_item_details_page), K
     }
 
     private fun initToolbar() {
-        toolbar.title = itemNameView.text
+        toolbar.title =
+            if (itemNameView.text.isNullOrEmpty()) getString(R.string.details) else itemNameView.text
         toolbar.navigationIcon = resources.getDrawable(R.drawable.ic_action_back)
         toolbar.setNavigationOnClickListener {
             activity

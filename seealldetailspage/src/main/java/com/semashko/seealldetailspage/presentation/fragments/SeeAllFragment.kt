@@ -105,9 +105,9 @@ class SeeAllFragment : Fragment(R.layout.fragment_see_all) {
         }
 
         when {
-            homeModel?.attractions?.isNotEmpty() == true -> toolbar?.title = "Attractions"
-            homeModel?.routes?.isNotEmpty() == true -> toolbar?.title = "Tourists Routes"
-            homeModel?.mansions?.isNotEmpty() == true -> toolbar?.title = "Mansions"
+            homeModel?.attractions?.isNotEmpty() == true -> toolbar?.title = getString(R.string.attractions)
+            homeModel?.routes?.isNotEmpty() == true -> toolbar?.title = getString(R.string.tourists_routes)
+            homeModel?.mansions?.isNotEmpty() == true -> toolbar?.title = getString(R.string.mansions)
         }
     }
 

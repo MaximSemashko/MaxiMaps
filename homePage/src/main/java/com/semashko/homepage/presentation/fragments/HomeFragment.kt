@@ -127,9 +127,9 @@ class HomeFragment : Fragment(R.layout.home_fragment), KoinComponent {
     }
 
     private fun initSeeAllButtons() {
-        seeAllAttractionsView.text = Html.fromHtml("<u>See all</>")
-        seeAllMansionsView.text = Html.fromHtml("<u>See all</>")
-        seeAllTouristsRoutesView.text = Html.fromHtml("<u>See all</>")
+        seeAllAttractionsView.text = Html.fromHtml("<u>${getString(R.string.see_all)}</>")
+        seeAllMansionsView.text = Html.fromHtml("<u>${getString(R.string.see_all)}</>")
+        seeAllTouristsRoutesView.text = Html.fromHtml("<u>${getString(R.string.see_all)}</>")
 
         seeAllTouristsRoutesView.setOnClickListener {
             openSeeAllDetailsPage(HomeModel(routes = touristsRoutesList))
@@ -163,17 +163,9 @@ class HomeFragment : Fragment(R.layout.home_fragment), KoinComponent {
     }
 
     private fun initRecyclerView() {
-        touristsRoutesAdapter = TouristsRoutesAdapter(
-            activity
-        )
-
-        mansionsAdapter = MansionsAdapter(
-            activity
-        )
-
-        attractionsAdapter = AttractionsAdapter(
-            activity
-        )
+        touristsRoutesAdapter = TouristsRoutesAdapter(activity)
+        mansionsAdapter = MansionsAdapter(activity)
+        attractionsAdapter = AttractionsAdapter(activity)
 
         touristsRoutesRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
