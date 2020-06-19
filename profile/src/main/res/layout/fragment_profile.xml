@@ -2,11 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/profileContainer"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -57,17 +56,17 @@
                         android:id="@+id/profileNameTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="\@appsnippuser"
-                        android:textSize="28dp"
-                        android:textStyle="bold" />
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        tools:text="\@appsnippuser" />
 
                     <TextView
                         android:id="@+id/profileEmailTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="developer@appsnipp.com"
-                        android:textSize="12dp"
-                        android:textStyle="bold" />
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        tools:text="developer@appsnipp.com" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -87,7 +86,7 @@
                             android:id="@+id/exitButton"
                             style="@style/profileStyledBackButton"
                             android:gravity="center_horizontal"
-                            android:text="Exit"
+                            android:text="@string/exit"
                             android:textSize="18sp" />
                     </RelativeLayout>
 

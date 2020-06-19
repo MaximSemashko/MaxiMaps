@@ -99,8 +99,8 @@ class RegistrationActivity : AppCompatActivity() {
                 birthDay = birthDay
             )
         } else {
-            view.snack("Check your email, name and password!") {
-                action("Close") {}
+            view.snack(getString(R.string.check_your_email_name_and_password)) {
+                action(R.string.close) {}
             }
 
             null

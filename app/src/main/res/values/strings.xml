@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">MaxiMaps</string>
-    <string name="maps">Maps</string>
-    <string name="chat">Chat</string>
-    <string name="events">Events</string>
-    <string name="home">Home</string>
-</resources>

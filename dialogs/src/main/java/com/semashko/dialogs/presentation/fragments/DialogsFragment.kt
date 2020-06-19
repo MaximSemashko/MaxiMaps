@@ -57,7 +57,7 @@ class DialogsFragment : Fragment(R.layout.fragment_dialog) {
     }
 
     private fun initToolbar() {
-        toolbar.title = "Dialogs"
+        toolbar.title = getString(R.string.dialogs)
     }
 
     private fun initRecyclerView(dialogs: List<Dialog>) {
@@ -71,9 +71,5 @@ class DialogsFragment : Fragment(R.layout.fragment_dialog) {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = dialogAdapter
         }
-    }
-
-    companion object {
-        fun newInstance() = DialogsFragment()
     }
 }

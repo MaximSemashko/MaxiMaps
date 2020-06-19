@@ -25,7 +25,6 @@
         android:layout_height="54dp"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/commentsTextView"
         app:layout_constraintStart_toStartOf="@id/toolbar"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:src="@drawable/forest" />
@@ -36,12 +35,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
-        android:text="Name"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/profileImageView"
         app:layout_constraintStart_toEndOf="@+id/profileImageView"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="Name" />
 
     <TextView
         android:id="@+id/comments1NameView"
@@ -49,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
-        android:text="Public for all"
+        android:text="@string/public_for_all"
         app:layout_constraintEnd_toEndOf="@+id/userNameView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/profileImageView"
@@ -84,7 +83,7 @@
         android:autoLink="all"
         android:backgroundTint="@color/orange"
         android:gravity="top|left"
-        android:hint="string/message_edit_text_hint"
+        android:hint="@string/message"
         android:inputType="textMultiLine|textCapSentences"
         android:lines="5"
         android:maxLines="10"
@@ -102,7 +101,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@color/orange"
-        android:text="Send"
+        android:text="@string/send"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:cornerRadius="8dp"

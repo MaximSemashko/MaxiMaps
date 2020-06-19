@@ -5,26 +5,23 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.google.gson.Gson
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.semashko.comments.R
 import com.semashko.comments.data.entities.Reviews
 import com.semashko.comments.presentation.CommentUiState
 import com.semashko.comments.presentation.CommentViewModel
+import com.semashko.extensions.constants.EMPTY
 import com.semashko.extensions.gone
+import com.semashko.extensions.toEditable
 import com.semashko.extensions.visible
 import com.semashko.provider.models.detailsPage.ItemDetails
 import com.semashko.provider.preferences.IUserInfoPreferences
-import com.squareup.okhttp.MediaType
-import com.squareup.okhttp.OkHttpClient
-import com.squareup.okhttp.Request
-import com.squareup.okhttp.RequestBody
 import kotlinx.android.synthetic.main.fragment_add_comment.*
 import org.koin.androidx.scope.lifecycleScope
 import org.koin.androidx.viewmodel.scope.viewModel
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import java.io.IOException
-import kotlin.concurrent.thread
 
 private const val ITEM_DETAILS_MODEL = "ITEM_DETAILS_MODEL"
 
@@ -39,6 +36,7 @@ class AddCommentFragment : Fragment(R.layout.fragment_add_comment), KoinComponen
         arguments?.let {
             itemDetails = it.getParcelable(ITEM_DETAILS_MODEL)
         }
+
         Log.i("TAG666", itemDetails.toString())
     }
 
@@ -69,7 +67,8 @@ class AddCommentFragment : Fragment(R.layout.fragment_add_comment), KoinComponen
 
         initSendButton()
         initToolbar()
-
+        initUserInfo()
+    }
 //        thread {
 //            val itemDetailsList = itemDetails?.reviews as ArrayList<Reviews>
 //            itemDetailsList.add(initReview())
@@ -77,7 +76,6 @@ class AddCommentFragment : Fragment(R.layout.fragment_add_comment), KoinComponen
 //                itemDetailsList
 //            )
 //        }
-    }
 
 //    @Throws(IOException::class)
 //    fun addItemToBookmarks(reviews: List<Reviews>): Boolean {
@@ -95,10 +93,20 @@ class AddCommentFragment : Fragment(R.layout.fragment_add_comment), KoinComponen
 //        return response.isSuccessful
 //    }
 
+    private fun initUserInfo() {
+        Glide.with(requireContext())
+            .load("https://firebasestorage.googleapis.com/v0/b/maximaps.appspot.com/o/${userInfoPreferences.localId}?alt=media")
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(profileImageView)
+
+        userNameView.text =
+            if (userInfoPreferences.name.isNullOrEmpty()) "Maxim" else userInfoPreferences.name
+    }
 
     private fun initSendButton() {
         sendButton.setOnClickListener {
             viewModel.loadComment(initReview())
+            commentText.text = EMPTY.toEditable()
         }
     }
 
@@ -112,7 +120,7 @@ class AddCommentFragment : Fragment(R.layout.fragment_add_comment), KoinComponen
     }
 
     private fun initToolbar() {
-        toolbar.title = "Comment"
+        toolbar.title = getString(R.string.comment)
         toolbar.navigationIcon = resources.getDrawable(R.drawable.ic_action_back)
         toolbar.setNavigationOnClickListener {
             activity

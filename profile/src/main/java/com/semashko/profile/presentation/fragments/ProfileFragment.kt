@@ -59,7 +59,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), KoinComponent {
         } else {
             initUserInfo(userModel ?: throw Throwable("Model is empty"))
 
-            exitButton.text = "Message"
+            exitButton.text = getString(R.string.message)
             exitButton.setOnClickListener {
                 navigation.openChatFragment(
                     R.id.profileContainer,

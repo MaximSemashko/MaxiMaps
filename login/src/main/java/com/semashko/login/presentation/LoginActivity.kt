@@ -66,8 +66,8 @@ class LoginActivity : AppCompatActivity() {
         return if (email.isNotEmpty() && password.isNotEmpty()) {
             User(email, password)
         } else {
-            view.snack("Check your email or password") {
-                action("Close") {}
+            view.snack(R.string.check_your_email_or_password) {
+                action(R.string.close) {}
             }
 
             null

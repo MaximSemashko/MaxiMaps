@@ -55,7 +55,7 @@ class BookmarksFragment : Fragment(R.layout.fragment_bookmarks) {
     }
 
     private fun initToolbar() {
-        toolbar.title = "Bookmarks"
+        toolbar.title = getString(R.string.bookmarks)
     }
 
     private fun initRecyclerView() {
@@ -70,9 +70,5 @@ class BookmarksFragment : Fragment(R.layout.fragment_bookmarks) {
                 )
             )
         }
-    }
-
-    companion object {
-        fun newInstance() = BookmarksFragment()
     }
 }
