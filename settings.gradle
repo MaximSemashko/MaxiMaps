@@ -1,3 +1,4 @@
+include ':dbRoom'
 include ':users'
 include ':app', ':login', ':bookmarks', ':registration', ':commonResources', ':extensions', ':network', ':homePage', ':provider', ':seealldetailspage', ':itemDetailsPage'
 rootProject.name = 'MaxiMaps'
