@@ -90,7 +90,7 @@
             <ImageView
                 android:id="@+id/addressImageView"
                 style="@style/profileDetailsImage"
-                android:src="@drawable/ic_address" />
+                android:src="@drawable/ic_address_profile" />
 
             <TextView
                 style="@style/profileDetailsTextMain"

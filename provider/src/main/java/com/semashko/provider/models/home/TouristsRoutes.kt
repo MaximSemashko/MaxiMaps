@@ -27,8 +27,8 @@ data class TouristsRoutes(
     val imagesUrls: List<String>? = null,
 
     @SerializedName("distance")
-    val distance: Double? = null,
+    val distance: String? = null,
 
     @SerializedName("duration")
-    val duration: Long? = null
+    val duration: String? = null
 ) : Parcelable

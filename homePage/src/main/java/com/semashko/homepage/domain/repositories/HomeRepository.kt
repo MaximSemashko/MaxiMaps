@@ -35,6 +35,7 @@ class HomeRepository(
         return withContext(Dispatchers.IO) {
             runCatching {
 //                Result.Success(homeService.getTouristsRoutes() ?: emptyList())
+                touristsRoutesDao.deleteAll()
                 Log.i("TAG666", getTouristsRoutesFromRoom().toString())
                 Result.Success(getTouristsRoutesFromRoom() ?: emptyList())
             }.getOrElse {
@@ -47,6 +48,7 @@ class HomeRepository(
         return withContext(Dispatchers.IO) {
             runCatching {
 //                Result.Success(homeService.getMansion() ?: emptyList())
+                mansionsDao.deleteAll()
                 Log.i("TAG666", getMansionsFromRoom().toString())
                 Result.Success(getMansionsFromRoom() ?: emptyList())
             }.getOrElse {
@@ -59,6 +61,7 @@ class HomeRepository(
         return withContext(Dispatchers.IO) {
             runCatching {
 //                Result.Success(homeService.getAttractions() ?: emptyList())
+                attractionsDao.deleteAll()
                 Log.i("TAG666", getAttractionsFromRoom().toString())
                 Result.Success(getAttractionsFromRoom() ?: emptyList())
             }.getOrElse {

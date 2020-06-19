@@ -66,7 +66,7 @@ class TouristsRoutesAdapter(
     class TouristsRoutesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(touristsRoute: TouristsRoutes) {
             itemView.touristRouteNameView.text = touristsRoute.name
-            itemView.touristRouteDurationView.text = touristsRoute.type
+            itemView.touristRouteDurationView.text = touristsRoute.duration
         }
     }
 }

@@ -12,7 +12,7 @@ data class ItemDetails(
     val points: List<Point>? = null,
     val address: String? = null,
     val workingHours: String? = null,
-    val duration: Long? = null,
+    val duration: String? = null,
     val reviews: List<Reviews>? = null,
     val imagesUrls: List<String>? = null
 ) : Parcelable
