@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MaxiMaps</string>
+    <string name="maps">Maps</string>
+    <string name="chats">Chats</string>
+    <string name="saved">Saved</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+
+    <string name="not_found_error_message">Not found</string>
+    <string name="network_error_message">Network error</string>
+    <string name="remote_error_message">Remote server error</string>
+    <string name="unknown_error_message">Unknown error</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="message">Message</string>
+    <string name="chat">Chat</string>
+    <string name="public_for_all">Public for all</string>
+    <string name="send">Send</string>
+    <string name="comments">Comments</string>
+    <string name="comment">Comment</string>
+    <string name="search">Search</string>
+    <string name="dialogs">Dialogs</string>
+    <string name="attractions">Attractions</string>
+    <string name="see_all">See all</string>
+    <string name="tourists_routes">Tourists routes</string>
+    <string name="mansions">Mansions</string>
+    <string name="show_on_map">Show on map</string>
+    <string name="address">Address:</string>
+    <string name="hours">Hours:</string>
+    <string name="reviews">Reviews</string>
+    <string name="write_a_review">Write a review</string>
+    <string name="people_also_search_for">People also search for</string>
+    <string name="details">details</string>
+    <string name="type">Type:</string>
+    <string name="duration">Duration:</string>
+    <string name="bookmark_was_added">Bookmark was added</string>
+    <string name="close">Close</string>
+    <string name="check_your_email_or_password">Check your email or password</string>
+    <string name="travell_community_app">Travell community app</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="create_new">create new</string>
+    <string name="turn_on_location">Turn on location</string>
+    <string name="do_you_want_to_exit">Do you want to exit?</string>
+    <string name="yes">Yes</string>
+    <string name="decline">Decline</string>
+    <string name="account_info">Account Info</string>
+    <string name="name">Name</string>
+    <string name="mobile">Mobile</string>
+    <string name="day_of_birth">D.O.B</string>
+    <string name="exit">Exit</string>
+    <string name="registration">Registration</string>
+    <string name="upload_image">Upload image</string>
+    <string name="sign_up">Sign up</string>
+    <string name="check_your_email_name_and_password">Check your email, name and password!</string>
+    <string name="search_your_destination">Search your destination</string>
+    <string name="sorry_we_didnt_find_anything">Sorry we didn\'t find anything</string>
+    <string name="nothing_to_show">Nothing to show</string>
+    <string name="users">Users</string>
+
+</resources>

@@ -1,19 +1,37 @@
 package com.semashko.maximaps.koin
 
 import android.app.Application
+import com.semashko.bookmarks.koin.bookmarksModule
+import com.semashko.comments.koin.commentsModule
+import com.semashko.dbroom.koin.roomModule
+import com.semashko.dialogs.koin.dialogsModule
 import com.semashko.homepage.koin.homeModule
+import com.semashko.itemdetailspage.koin.recommendationsModule
 import com.semashko.login.koin.loginModule
-import com.semashko.registration.koin.registrationModule
+import com.semashko.maximaps.pankchat.koin.messageModule
+import com.semashko.profile.koin.profileModule
+import com.semashko.searchfragment.koin.searchModule
 import com.semashko.seealldetailspage.koin.seeAllModule
+import com.semashko.users.koin.usersModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.KoinContextHandler.getOrNull
 import org.koin.core.context.startKoin
 
 val koinModules = listOf(
+    appModule,
     loginModule,
     registrationModule,
     homeModule,
-    seeAllModule
+    seeAllModule,
+    recommendationsModule,
+    bookmarksModule,
+    profileModule,
+    searchModule,
+    dialogsModule,
+    messageModule,
+    commentsModule,
+    usersModule,
+    roomModule
 )
 
 fun Application.initKoin() {

@@ -2,6 +2,8 @@ package com.semashko.provider.models.home
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import com.semashko.provider.Point
+import com.semashko.provider.models.detailsPage.Reviews
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -9,15 +11,21 @@ data class Mansions(
     @SerializedName("name")
     val name: String? = null,
 
+    @SerializedName("description")
+    val description: String? = null,
+
+    @SerializedName("points")
+    val points: List<Point>? = null,
+
     @SerializedName("address")
     val address: String? = null,
 
-    @SerializedName("contacts")
-    val contacts: List<String>? = null,
+    @SerializedName("workingHours")
+    val workingHours: String? = null,
 
-    @SerializedName("webSite")
-    val webSite: String? = null,
+    @SerializedName("reviews")
+    val reviews: List<Reviews>? = null,
 
-    @SerializedName("images")
+    @SerializedName("imageUrl")
     val imagesUrls: List<String>? = null
 ) : Parcelable

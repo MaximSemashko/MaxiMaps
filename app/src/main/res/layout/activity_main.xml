@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -37,18 +37,18 @@
             app:bt_colorInactive="@color/grey"
             app:bt_icon="@drawable/ic_home"
             app:bt_shape="@drawable/transition_background_drawable"
-            app:bt_title="Home" />
+            app:bt_title="@string/home" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
-            android:id="@+id/eventsPage"
+            android:id="@+id/bookmarksPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:bt_active="true"
             app:bt_colorActive="@color/orangeOpacity80"
             app:bt_colorInactive="@color/grey"
-            app:bt_icon="@drawable/ic_events"
+            app:bt_icon="@drawable/ic_saved"
             app:bt_shape="@drawable/transition_background_drawable"
-            app:bt_title="Events" />
+            app:bt_title="@string/saved" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/chatPage"
@@ -59,7 +59,7 @@
             app:bt_colorInactive="@color/grey"
             app:bt_icon="@drawable/ic_chat"
             app:bt_shape="@drawable/transition_background_drawable"
-            app:bt_title="Chats" />
+            app:bt_title="@string/chats" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/profilePage"
@@ -70,7 +70,7 @@
             app:bt_colorInactive="@color/grey"
             app:bt_icon="@drawable/ic_person"
             app:bt_shape="@drawable/transition_background_drawable"
-            app:bt_title="Profile" />
+            app:bt_title="@string/profile" />
 
     </com.gauravk.bubblenavigation.BubbleNavigationLinearView>
 

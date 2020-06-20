@@ -1,116 +1,93 @@
 package com.semashko.maximaps.presentation
 
+import android.content.Context
+import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
+import com.semashko.bookmarks.presentation.fragments.BookmarksFragment
 import com.semashko.homepage.presentation.fragments.HomeFragment
+import com.semashko.login.presentation.LoginActivity
 import com.semashko.maximaps.R
-import com.semashko.provider.models.home.Attractions
-import com.semashko.provider.models.home.HomeModel
-import com.semashko.provider.models.home.Mansions
-import com.semashko.provider.models.home.TouristsRoutes
-import com.semashko.seealldetailspage.presentation.fragments.SeeAllFragment
+import com.semashko.profile.presentation.fragments.ProfileFragment
+import com.semashko.provider.preferences.IUserInfoPreferences
+import com.semashko.users.presentation.fragments.UsersFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
-    private val touristsRoutesList = ArrayList<TouristsRoutes>()
-    private val attractionsList = ArrayList<Attractions>()
-    private val mansionsList = ArrayList<Mansions>()
+    private val userInfoPreferences: IUserInfoPreferences by inject()
+
+    private val onPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            bottomNavigationViewLinear.setCurrentActiveItem(position)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-        initList()
-        initViewPager()
-    }
-
-    private fun initList() {
-        for (i in 1..1000) {
-            touristsRoutesList.add(
-                TouristsRoutes(
-                    name = "name",
-                    type = "name",
-                    imageUrl = "https://picsum.photos/seed/picsum/800/800"
-                )
-            )
-
-            mansionsList.add(
-                Mansions(
-                    name = "name",
-                    address = "wtf street",
-                    imagesUrls = listOf(
-                        "https://picsum.photos/seed/picsum/800/800",
-                        "https://picsum.photos/seed/picsum/800/800",
-                        "https://picsum.photos/seed/picsum/800/800"
-                    )
-                )
-            )
-
-            attractionsList.add(
-                Attractions(
-                    name = "name",
-                    type = "type",
-                    description = "salam popolam",
-                    imageUrl = "https://picsum.photos/seed/picsum/800/800"
-                )
-            )
+        if (userInfoPreferences.localId.isNullOrEmpty() || userInfoPreferences.token.isNullOrEmpty()) {
+            LoginActivity.startActivity(this)
         }
+
+        initViewPager()
     }
 
     private fun initViewPager() {
         val listOfFragments =
             listOf(
-                SeeAllFragment.newInstance(HomeModel(routes = touristsRoutesList)),
                 HomeFragment(),
-                SeeAllFragment.newInstance(HomeModel(attractions = attractionsList)),
-                SeeAllFragment.newInstance(HomeModel(mansions = mansionsList))
+                BookmarksFragment(),
+                UsersFragment.newInstance(),
+                ProfileFragment.newInstance(null)
             )
 
         val screenSlidePagerAdapter = ScreenSlidePagerAdapter(
-            listOfFragments,
-            supportFragmentManager
+            this,
+            listOfFragments
         )
 
         viewPager.apply {
             adapter = screenSlidePagerAdapter
-            addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-
-                override fun onPageScrollStateChanged(state: Int) {
-                }
-
-                override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int
-                ) {
-
-                }
-
-                override fun onPageSelected(position: Int) {
-                    bottomNavigationViewLinear.setCurrentActiveItem(position)
-                }
-            })
+            isUserInputEnabled = false
+            registerOnPageChangeCallback(onPageChangeCallback)
 
             bottomNavigationViewLinear.setNavigationChangeListener { _, position ->
                 viewPager.setCurrentItem(position, true)
             }
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewPager.unregisterOnPageChangeCallback(onPageChangeCallback)
+    }
+
+    companion object {
+        fun startActivity(context: Context) {
+            with(context) {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+        }
+    }
 }
 
 class ScreenSlidePagerAdapter(
-    private val fragmentList: List<Fragment>,
-    fm: FragmentManager
-) : FragmentStatePagerAdapter(fm) {
+    activity: AppCompatActivity,
+    private val fragmentList: List<Fragment>
+) : FragmentStateAdapter(activity) {
+    override fun getItemCount(): Int = fragmentList.size
 
-    override fun getCount(): Int = fragmentList.size
-
-    override fun getItem(position: Int): Fragment {
+    override fun createFragment(position: Int): Fragment {
         if (position >= 0 && position < fragmentList.size)
             return fragmentList[position]
         return Fragment()

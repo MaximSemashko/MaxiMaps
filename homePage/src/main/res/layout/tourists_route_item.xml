@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="200dp"
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp">
@@ -23,11 +24,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Name"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:ellipsize="marquee"
+            android:maxLines="2"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/touristRouteImageView" />
+            app:layout_constraintTop_toBottomOf="@+id/touristRouteImageView"
+            tools:text="Name" />
 
         <TextView
             android:id="@+id/touristRouteDurationView"
@@ -35,11 +40,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:text="3h 30m"
+            android:ellipsize="marquee"
+            android:maxLines="2"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/touristRouteNameView" />
+            app:layout_constraintTop_toBottomOf="@+id/touristRouteNameView"
+            tools:text="3h 30m" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

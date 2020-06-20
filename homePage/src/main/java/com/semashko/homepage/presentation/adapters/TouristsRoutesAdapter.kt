@@ -1,22 +1,28 @@
 package com.semashko.homepage.presentation.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.semashko.homepage.R
+import com.semashko.provider.mappers.toItemDetails
 import com.semashko.provider.models.home.TouristsRoutes
+import com.semashko.provider.navigation.INavigation
 import kotlinx.android.synthetic.main.tourists_route_item.view.*
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
 class TouristsRoutesAdapter(
-    private val context: Context,
-    private val touristsRoutes: List<TouristsRoutes>
-) : RecyclerView.Adapter<TouristsRoutesAdapter.TouristsRoutesViewHolder>() {
+    private val activity: FragmentActivity?
+) : RecyclerView.Adapter<TouristsRoutesAdapter.TouristsRoutesViewHolder>(), KoinComponent {
 
-    private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
+    private val navigation: INavigation by inject()
+    private val touristsRoutes = mutableListOf<TouristsRoutes>()
+
+    private val layoutInflater: LayoutInflater = LayoutInflater.from(activity)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TouristsRoutesViewHolder {
         return TouristsRoutesViewHolder(
@@ -35,16 +41,32 @@ class TouristsRoutesAdapter(
     override fun onBindViewHolder(holder: TouristsRoutesViewHolder, position: Int) {
         holder.bind(touristsRoutes[position])
 
-        Glide.with(context)
-            .load(touristsRoutes[position].imageUrl)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(holder.itemView.touristRouteImageView)
+        activity?.let {
+            Glide.with(it)
+                .load(touristsRoutes[position].imagesUrls?.get(0))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.itemView.touristRouteImageView)
+        }
+
+        holder.itemView.setOnClickListener {
+            navigation.openItemDetailsPageFragment(
+                null,
+                activity,
+                touristsRoutes[position].toItemDetails()
+            )
+        }
+    }
+
+    fun setItems(items: List<TouristsRoutes>) {
+        touristsRoutes.clear()
+        touristsRoutes.addAll(items)
+        notifyDataSetChanged()
     }
 
     class TouristsRoutesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(touristsRoute: TouristsRoutes) {
             itemView.touristRouteNameView.text = touristsRoute.name
-            itemView.touristRouteDurationView.text = touristsRoute.type
+            itemView.touristRouteDurationView.text = touristsRoute.duration
         }
     }
 }
