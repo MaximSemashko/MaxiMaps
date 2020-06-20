@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.semashko.comments.R
-import com.semashko.comments.data.entities.Reviews
+import com.semashko.provider.models.detailsPage.Reviews
 import com.semashko.extensions.getDateTime
 import kotlinx.android.synthetic.main.comments_item.view.*
 

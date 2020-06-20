@@ -1,7 +1,7 @@
 package com.semashko.comments.data.api
 
 import com.google.gson.Gson
-import com.semashko.comments.data.entities.Reviews
+import com.semashko.provider.models.detailsPage.Reviews
 import com.squareup.okhttp.MediaType
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request

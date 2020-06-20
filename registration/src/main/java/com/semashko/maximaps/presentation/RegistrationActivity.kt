@@ -126,6 +126,7 @@ class RegistrationActivity : AppCompatActivity() {
         fun startActivity(context: Context) {
             with(context) {
                 val intent = Intent(this, RegistrationActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)
             }
         }

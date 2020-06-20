@@ -1,6 +1,6 @@
 package com.semashko.comments.domain.repositories
 
-import com.semashko.comments.data.entities.Reviews
+import com.semashko.provider.models.detailsPage.Reviews
 import com.semashko.comments.data.services.ICommentsService
 import com.semashko.extensions.utils.Result
 import kotlinx.coroutines.Dispatchers

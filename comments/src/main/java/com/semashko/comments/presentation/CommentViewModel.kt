@@ -3,7 +3,7 @@ package com.semashko.comments.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.semashko.comments.data.entities.Reviews
+import com.semashko.provider.models.detailsPage.Reviews
 import com.semashko.comments.domain.usecases.ICommentsUseCase
 import com.semashko.extensions.utils.Result
 import kotlinx.coroutines.*

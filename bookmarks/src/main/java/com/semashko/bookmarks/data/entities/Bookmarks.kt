@@ -27,7 +27,7 @@ data class Bookmarks(
     val workingHours: String? = null,
 
     @SerializedName("duration")
-    val duration: Long? = null,
+    val duration: String? = null,
 
     @SerializedName("reviews")
     val reviews: List<Reviews>? = null,

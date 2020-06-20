@@ -14,6 +14,6 @@ data class TouristsRoutes(
     val points: String? = null,
     val reviews: String? = null,
     val imagesUrls: String? = null,
-    val distance: Double? = null,
-    val duration: Long? = null
+    val distance: String? = null,
+    val duration: String? = null
 )

@@ -1,6 +1,6 @@
 package com.semashko.comments.domain.usecases
 
-import com.semashko.comments.data.entities.Reviews
+import com.semashko.provider.models.detailsPage.Reviews
 import com.semashko.extensions.utils.Result
 
 interface ICommentsUseCase {

@@ -66,7 +66,8 @@ class BookmarksFragment : Fragment(R.layout.fragment_bookmarks) {
             adapter = bookmarksAdapter
             addItemDecoration(
                 BaseItemDecoration(
-                    verticalMargin = resources.getDimension(R.dimen.default_padding).toInt()
+                    verticalMargin = resources.getDimension(R.dimen.default_padding).toInt(),
+                    horizontalMargin = resources.getDimension(R.dimen.small_padding).toInt()
                 )
             )
         }

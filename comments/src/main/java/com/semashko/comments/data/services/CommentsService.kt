@@ -1,7 +1,7 @@
 package com.semashko.comments.data.services
 
 import com.semashko.comments.data.api.CommentsApi
-import com.semashko.comments.data.entities.Reviews
+import com.semashko.provider.models.detailsPage.Reviews
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

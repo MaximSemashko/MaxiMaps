@@ -1,6 +1,6 @@
 package com.semashko.comments.presentation
 
-import com.semashko.comments.data.entities.Reviews
+import com.semashko.provider.models.detailsPage.Reviews
 
 sealed class CommentsUiState {
     object Loading : CommentsUiState()

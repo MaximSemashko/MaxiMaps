@@ -1,6 +1,6 @@
 package com.semashko.comments.data.services
 
-import com.semashko.comments.data.entities.Reviews
+import com.semashko.provider.models.detailsPage.Reviews
 
 interface ICommentsService {
 
