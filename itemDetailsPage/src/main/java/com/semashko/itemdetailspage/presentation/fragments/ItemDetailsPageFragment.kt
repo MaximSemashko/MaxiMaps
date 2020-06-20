@@ -59,7 +59,10 @@ class ItemDetailsPageFragment : Fragment(R.layout.fragment_item_details_page), K
         viewModel.recommendationsData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is RecommendationsUiState.Loading -> progressBar.visible()
-                is RecommendationsUiState.Success -> progressBar.gone()
+                is RecommendationsUiState.Success -> {
+                    recommendedItemsAdapter.setItems(it.attractions)
+                    progressBar.gone()
+                }
                 is RecommendationsUiState.Error -> progressBar.gone()
             }
         })

@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.semashko.comments.R
-import com.semashko.comments.data.entities.Reviews
+import com.semashko.provider.models.detailsPage.Reviews
 import com.semashko.comments.presentation.CommentUiState
 import com.semashko.comments.presentation.CommentViewModel
 import com.semashko.extensions.constants.EMPTY

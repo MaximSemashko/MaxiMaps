@@ -29,8 +29,8 @@ class CommentsFragment : Fragment(R.layout.fragment_comments), KoinComponent {
 
     private lateinit var commentsAdapter: CommentsAdapter
 
-    override fun onStart() {
-        super.onStart()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         arguments?.let {
             itemDetails = it.getParcelable(ITEM_DETAILS_MODEL)
@@ -92,7 +92,7 @@ class CommentsFragment : Fragment(R.layout.fragment_comments), KoinComponent {
 
     private fun initRecyclerView() {
         commentsAdapter = CommentsAdapter(activity)
-
+        itemDetails?.reviews?.let { commentsAdapter.setItems(it) }
         commentsRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = commentsAdapter

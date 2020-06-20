@@ -3,7 +3,6 @@ package com.semashko.bookmarks.presentation.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -70,7 +69,8 @@ class BookmarksAdapter(
 class BookmarkViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(bookmark: Bookmarks) {
         itemView.bookmarkNameView.text = bookmark.name
-        itemView.bookmarkTypeView.text = bookmark.type
+        itemView.bookmarkTypeView.text =
+            bookmark.type ?: itemView.context.getString(R.string.bookmarks)
         itemView.bookmarkExtraView.text = bookmark.description
     }
 }

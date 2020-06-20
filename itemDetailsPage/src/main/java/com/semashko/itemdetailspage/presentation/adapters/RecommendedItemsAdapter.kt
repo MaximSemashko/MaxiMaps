@@ -50,7 +50,7 @@ class RecommendedItemsAdapter(
 
         activity?.let {
             Glide.with(it)
-                .load(attractions[position].imagesUrls)
+                .load(attractions[position].imagesUrls?.get(0))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.itemView.recommendedImageView)
         }
